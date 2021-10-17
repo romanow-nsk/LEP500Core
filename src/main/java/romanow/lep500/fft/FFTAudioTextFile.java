@@ -53,7 +53,7 @@ public class FFTAudioTextFile implements FFTFileSource{
         return data.clone();
         }
 
-    public void readHeader(FileDescription fd, BufferedReader AudioFile) throws IOException {
+    public static void readHeader(FileDescription fd, BufferedReader AudioFile) throws IOException {
         String in;
         fd.fileDateTime = AudioFile.readLine();             // 0
         fd.fileGroupTitle = AudioFile.readLine();           // 1

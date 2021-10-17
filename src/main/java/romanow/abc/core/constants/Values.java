@@ -11,29 +11,8 @@ public class Values extends ValuesBase {
     // 2. Массивы строк перекрываются
     // 3. статическая инициализация наследуется
     private final static int ESSReleaseNumber=31;                  // номер сборки сервера
-    //private final static String ApkName = "Unity.apk";          // Имя файла
-    //private final static String mongoDBName = "ess";
-    //private final static String mongoDBUser = "ess";
-    //private final static String ServerName="ESSDataserver.jar";
-    //private final static String mongoDBPassword = "ess";
-    //public final static String modulePackage = "romanow.abc.ess2.desktop.module";
-    //private final static User essSuperUser=new User(ValuesBase.UserSuperAdminType, "Система", "", "", "UnityDataserver", "pi31415926","9130000000");
     //----------- Данные ПЛК вне мета-системы -------------------------------------
-    public final static int LocalCommandRegister=410;
-    public final static int RemoteCommandRegister1=480;
-    public final static int RemoteCommandRegister2=485;
-    public final static int RemoteSettingEnableCommand=240;
-    public final static int LocalSettingEnableCommand=29879;
-    public final static int ESSOnCommand=5;                     // Включить систему
-    public final static int ESSOffCommand=6;                    // Выключить систему
-    public final static int ESSStateRegister=500;               // Регимтр состояния включения
-    public final static int ESSStateOnOffBit=1;                 // Бит Состояния включения
-    public final static int ESSStateNone=0;                     // Состояние включения - недоступен
-    public final static int ESSStateOff=1;                      // Состояние включения - включен
-    public final static int ESSStateOn=2;                       // Состояние включения - выключен
     public final static String ESSStateIcon[]={"/ess_none.png","/ess_off.png","/ess_on.png"};
-    public final static int RemoteDisableColorDec = 0x00909090;
-    public final static int AccessDisableColor = 0xFF808080;
     //-----------------------------------------------------------------------------
     public static void init() {
         }
@@ -42,18 +21,18 @@ public class Values extends ValuesBase {
     private  final static String ess2ClassNames[]={
             "romanow.abc.core.constants.Values",
             "romanow.abc.core.entity.subjectarea.WorkSettings",
-            "romanow.abc.dataserver.ESSDataServer",
-            "romanow.abc.dataserver.ESSConsoleServer",
-            "romanow.abc.desktop.ESSCabinet",
-            "romanow.abc.desktop.ESSClient",
+            "romanow.abc.dataserver.LEP500DataServer",
+            "romanow.abc.dataserver.LEP500ConsoleServer",
+            "romanow.abc.desktop.LEP500Cabinet",
+            "romanow.abc.desktop.LEP500Client",
             "",""};
     private  final static String ess2AppNames[]={
-            "EnergyStorageSystem",
-            "ess",
-            "ess",
-            "ess",
-            "ESSClient.apk",
-            "ESSDataserver.jar",
+            "LEP500",
+            "LEP500",
+            "LEP500",
+            "LEP500",
+            "LEP500.apk",
+            "LEP500Dataserver.jar",
             "romanow.abc.desktop.module",
             "/drawable/battery.png",
             "СМУ СНЭ (v2)"
@@ -86,6 +65,9 @@ public class Values extends ValuesBase {
             public WorkSettingsBase currentWorkSettings() { return new WorkSettings(); }
             };
         EntityFactory.put(new TableItem("Настройки", WorkSettings.class));
+        EntityFactory.put(new TableItem("Данные датчик", MeasureFile.class));
+        EntityFactory.put(new TableItem("Опора", MeasureGroup.class));
+        EntityFactory.put(new TableItem("Линия", PowerLine.class));
         /*
         EntityFactory.put(new TableItem("Мета:Внешняя подсистема", MetaExternalSystem.class));
         EntityFactory.put(new TableItem("Мета:Подсистемы", MetaSubSystem.class));
