@@ -105,11 +105,6 @@ public class Values extends ValuesBase {
         PrefixMap.put("FailureSetting.endTime","e");
         PrefixMap.put("ESSNode.stateTestTime","s");
         PrefixMap.put("ESSNode.innerTestTime","i");
-        PrefixMap.put("ESSNode.streamDataTime","d");
-        PrefixMap.put("ArchStreamPeriod.startServerTime","b");
-        PrefixMap.put("ArchStreamPeriod.shutDownServerTime","e");
-        PrefixMap.put("ArchStreamPeriod.firstStreamTime","f");
-        PrefixMap.put("ArchStreamPeriod.lastStreamTime","l");
          */
        }
     //-----------------------------------------------------------------------------------
