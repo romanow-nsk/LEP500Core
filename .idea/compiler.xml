@@ -9,8 +9,10 @@
         <outputRelativeToContentRoot value="true" />
         <module name="ABCCore" />
         <module name="LEP500Core" />
-        <module name="LEP500Common" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="LEP500Common" target="1.8" />
+    </bytecodeTargetLevel>
   </component>
 </project>
