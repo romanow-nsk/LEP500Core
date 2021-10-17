@@ -15,6 +15,7 @@ public class Values extends ValuesBase {
     public final static String ESSStateIcon[]={"/ess_none.png","/ess_off.png","/ess_on.png"};
     //-----------------------------------------------------------------------------
     public static void init() {
+        ValuesBase.init();
         }
     public final static int PopupMessageDelay=6;                // Тайм-аут всплывающего окна
     public final static int PopupLongDelay=20;                  // Тайм-аут всплывающего окна
@@ -27,10 +28,10 @@ public class Values extends ValuesBase {
             "romanow.abc.desktop.LEP500Client",
             "",""};
     private  final static String ess2AppNames[]={
-            "LEP500",
-            "LEP500",
-            "LEP500",
-            "LEP500",
+            "lep500",
+            "lep500",
+            "lep500",
+            "lep500",
             "LEP500.apk",
             "LEP500Dataserver.jar",
             "romanow.abc.desktop.module",
