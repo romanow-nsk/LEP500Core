@@ -34,8 +34,8 @@ public class Values extends ValuesBase {
             "LEP500.apk",
             "LEP500Dataserver.jar",
             "romanow.abc.desktop.module",
-            "/drawable/battery.png",
-            "СМУ СНЭ (v2)"
+            "/drawable/lep500min.png",
+            "(C) Опоры России"
             };
     static {
         env = new I_Environment() {
