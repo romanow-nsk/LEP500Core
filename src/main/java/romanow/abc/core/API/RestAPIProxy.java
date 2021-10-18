@@ -21,7 +21,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import java.util.concurrent.TimeUnit;
 
 public class RestAPIProxy  implements I_APIConnector{
-    private RestAPIESS2 api;
+    private RestAPILEP500 api;
     private boolean on=false;
     private RestAPIBase service=null;
     public abstract class APICall<T> {
