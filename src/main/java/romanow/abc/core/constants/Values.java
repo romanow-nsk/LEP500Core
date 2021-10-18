@@ -4,6 +4,7 @@ import romanow.abc.core.UniException;
 import romanow.abc.core.entity.base.WorkSettingsBase;
 import romanow.abc.core.entity.subjectarea.*;
 import romanow.abc.core.entity.users.User;
+import romanow.lep500.LEP500Params;
 
 
 public class Values extends ValuesBase {
@@ -69,6 +70,7 @@ public class Values extends ValuesBase {
         EntityFactory.put(new TableItem("Измерение", MeasureFile.class));
         EntityFactory.put(new TableItem("Опора", MeasureGroup.class));
         EntityFactory.put(new TableItem("Линия", PowerLine.class));
+        EntityFactory.put(new TableItem("Параметры", LEP500Params.class));
         PrefixMap.put("MeasureFile.importDate","i");
         PrefixMap.put("MeasureFile.measureDate","m");
         PrefixMap.put("MeasureFile.gps","g");

@@ -1,9 +1,10 @@
 package romanow.lep500;
 
 import romanow.abc.core.entity.Entity;
+import romanow.abc.core.entity.subjectarea.NamedEntity;
 import romanow.lep500.fft.FFT;
 
-public class LEP500Params extends Entity {
+public class LEP500Params extends NamedEntity {
     public double FirstFreq=0.4;               // Нижняя граница частоты при поиске максимусов
     public double LastFreq=30;                 // Верхняя граница частоты при поиске максимусов
     public int  nTrendPoints=50;               // Точек при сглаживании тренда в волне =0 - отключено
