@@ -68,8 +68,8 @@ public class Values extends ValuesBase {
             };
         EntityFactory.put(new TableItem("Настройки", WorkSettings.class));
         EntityFactory.put(new TableItem("Измерение", MeasureFile.class));
-        EntityFactory.put(new TableItem("Опора", MeasureGroup.class));
-        EntityFactory.put(new TableItem("Линия", PowerLine.class));
+        EntityFactory.put(new TableItem("Опора", MeasureGroup.class).add("name"));
+        EntityFactory.put(new TableItem("Линия", PowerLine.class).add("name"));
         EntityFactory.put(new TableItem("Параметры", LEP500Params.class));
         PrefixMap.put("MeasureFile.importDate","i");
         PrefixMap.put("MeasureFile.measureDate","m");
@@ -113,6 +113,27 @@ public class Values extends ValuesBase {
         PrefixMap.put("ESSNode.innerTestTime","i");
          */
        }
+    //------------- Типы заключений о состоянии опоры --------------------------------------
+    @CONST(group = "MState", title = "Неопределено")
+    public final static int MSUndefined = 0;
+    @CONST(group = "MState", title = "Норма")           // Единственный пик
+    public final static int MSNormal = 1;
+    @CONST(group = "MState", title = "Зашумлено")       // После фильтрации нет пиков
+    public final static int MSNoise = 2;
+    @CONST(group = "MState", title = "Слабый сигнал")   // Низкий уровень относительного мнимого
+    public final static int MSLowLevel = 3;
+    @CONST(group = "MState", title = "Невыраженный пик")// Первый слабо отличается от остальных
+    public final static int MSNoPeak = 4;
+    @CONST(group = "MState", title = "Второй пик++")    // Второй пик рядом (сильно)
+    public final static int MSSecond1 = 5;
+    @CONST(group = "MState", title = "Второй пик+")     // Второй пик рядом (слабо)
+    public final static int MSSecond2 = 6;
+    @CONST(group = "MState", title = "Сумма пиков++")   // Первый пик не проходит интегрально (сильно)
+    public final static int MSSumPeak1 = 7;
+    @CONST(group = "MState", title = "Сумма пиков+")    // Первый пик не проходит интегрально (слабо)
+    public final static int MSSumPeak2 = 8;
+    @CONST(group = "MState", title = "Норма-")          // Первый пик проходит
+    public final static int MSNormalMinus = 9;
     //------------- Типы пользователей -----------------------------------------------------
     @CONST(group = "User", title = "Аналитик")
     public final static int UserLEP500Analytic = 3;

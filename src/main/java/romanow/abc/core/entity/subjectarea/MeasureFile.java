@@ -16,7 +16,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class MeasureFile extends Entity {
-    private EntityRefList<MeasureGroup> MeasureGroup = new EntityRefList<>(MeasureGroup.class);
+    private EntityLink<MeasureGroup> MeasureGroup = new EntityLink<>();
     private OwnDateTime importDate = new OwnDateTime();                         // Время создания
     private EntityLink<Artifact> artifact = new EntityLink<>(Artifact.class);   // Файл волны
     private String srcNumber="";                                                // Имя датчика
@@ -57,8 +57,28 @@ public class MeasureFile extends Entity {
                     }
                 return new Pair<>("Ошибка формата файла: "+ex.toString(),null);
                 }
+            }
+    public String toString(){
+        return getOid()+" "+fileSensorName+"("+fileMeasureCounter+") "+srcNumber+"/"+fileSensorName+" "+measureDate.dateTimeToString()+"/"+importDate.dateTimeToString();
         }
-        public String toString(){
-            return getOid()+" "+fileSensorName+"("+fileMeasureCounter+") "+srcNumber+"/"+fileSensorName+" "+measureDate.dateTimeToString()+"/"+importDate.dateTimeToString();
-        }
+    public EntityLink<romanow.abc.core.entity.subjectarea.MeasureGroup> getMeasureGroup() {
+        return MeasureGroup; }
+    public OwnDateTime getImportDate() {
+        return importDate; }
+    public EntityLink<Artifact> getArtifact() {
+        return artifact; }
+    public String getSrcNumber() {
+        return srcNumber; }
+    public String getComment() {
+        return comment; }
+    public GPSPoint getGps() {
+        return gps; }
+    public double getFileFreq() {
+        return fileFreq; }
+    public OwnDateTime getMeasureDate() {
+        return measureDate; }
+    public String getFileSensorName() {
+        return fileSensorName; }
+    public int getFileMeasureCounter() {
+        return fileMeasureCounter; }
 }

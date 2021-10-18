@@ -1,15 +1,20 @@
 package romanow.abc.core.entity.subjectarea;
 
+import romanow.abc.core.constants.Values;
 import romanow.abc.core.entity.Entity;
+import romanow.abc.core.entity.EntityLink;
 import romanow.abc.core.entity.EntityRefList;
 
-public class MeasureGroup extends Entity{
-    private String groupName="";
-    private EntityRefList<PowerLine> PowerLine = new EntityRefList<>(PowerLine.class);
-    public String getGroupName() {
-        return groupName; }
-    public EntityRefList<PowerLine> getPowerLine() {
+public class MeasureGroup extends NamedEntity{
+    private int measureState = Values.MSUndefined;
+    private EntityLink<PowerLine> PowerLine = new EntityLink<>();
+    private EntityRefList<MeasureFile> files = new EntityRefList<>(MeasureFile.class);
+    public int getMeasureState() {
+        return measureState; }
+    public void setMeasureState(int measureState) {
+        this.measureState = measureState; }
+    public EntityLink<PowerLine> getPowerLine() {
         return PowerLine; }
-    public void setGroupName(String groupName) {
-        this.groupName = groupName; }
+    public EntityRefList<MeasureFile> getFiles() {
+        return files; }
 }
