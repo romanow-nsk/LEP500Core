@@ -19,7 +19,7 @@ public class MeasureFile extends Entity {
     private EntityRefList<MeasureGroup> MeasureGroup = new EntityRefList<>(MeasureGroup.class);
     private OwnDateTime importDate = new OwnDateTime();                         // Время создания
     private EntityLink<Artifact> artifact = new EntityLink<>(Artifact.class);   // Файл волны
-    private String srcNumber="";                                                // Номер датчика
+    private String srcNumber="";                                                // Имя датчика
     private String comment="";                                                  // Комментарий
     private GPSPoint gps = new GPSPoint();
     private double fileFreq = 0;                                                // Частота измерений из файла

@@ -57,6 +57,9 @@ public class FFTAudioTextFile implements FFTFileSource{
         String in;
         fd.fileDateTime = AudioFile.readLine();             // 0
         fd.fileGroupTitle = AudioFile.readLine();           // 1
+        if (fd.fileGroupTitle.startsWith(fd.lepNumber)){
+            fd.title = fd.fileGroupTitle.substring(fd.lepNumber.length()+1);
+            }
         String geoY = AudioFile.readLine();                 // 2
         String geoX = AudioFile.readLine();                 // 3
         int gpsState = Integer.parseInt(AudioFile.readLine());  // 4
