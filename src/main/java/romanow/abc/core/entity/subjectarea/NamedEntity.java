@@ -12,4 +12,7 @@ public class NamedEntity extends Entity {
     public NamedEntity(String name) {
         this.name = name; }
     public NamedEntity(){}
+    public String getTitle(){
+        return super.getTitle()+" "+name;
+    }
 }

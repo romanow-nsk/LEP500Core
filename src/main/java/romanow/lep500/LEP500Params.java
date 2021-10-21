@@ -5,6 +5,7 @@ import romanow.abc.core.entity.subjectarea.NamedEntity;
 import romanow.lep500.fft.FFT;
 
 public class LEP500Params extends NamedEntity {
+    public String paramListName="...";
     public double FirstFreq=0.4;               // Нижняя граница частоты при поиске максимусов
     public double LastFreq=30;                 // Верхняя граница частоты при поиске максимусов
     public int  nTrendPoints=50;               // Точек при сглаживании тренда в волне =0 - отключено
@@ -14,13 +15,13 @@ public class LEP500Params extends NamedEntity {
     public int  kSmooth=30;                    // Циклов сглаживания
     public int  winFun= FFT.WinModeRectangle;   // Вид функции окна
     public int  measureDuration=10;            // Время снятия вибрации в сек (1...300)
-    public String measureGroup="СМ-300";       // Подпись группы
-    public String measureTitle="Опора 125";    // Подпись опоры
+    public String measureGroup="СМ-300";       // Название линии
+    public String measureTitle="Опора 125";    // Название опоры
     public int measureCounter=1;               // Счетчик измерения
     public boolean fullInfo=false;
     public double measureFreq=102.8;            // Частота измерений
-    public int amplLevelProc=50;                // Процент снижения амплитуд для фильтрации
-    public int powerLevelProc=20;               // Процент снижения амплитуд для фильтрации
+    public int amplLevelProc=50;                // Уровень амплитуды пика для отсечения
+    public int powerLevelProc=20;               // Уровень мощности пика для отсечения
     public double alarmFreqKoef=1.25;           // относительная ширина диапазона для тревоги
     public String mailToSend="romanow@ngs.ru";
     public double K1=0.3;                       // Уровень нормированной амплитуды основого пика - слабый сигнал
@@ -30,5 +31,8 @@ public class LEP500Params extends NamedEntity {
     public double K5=0.2;                       // Снижение влияния с разницей частот
     public double K6=3;                         // Уровень заленого
     public double K7=1.5;                       // Уровень желтого
+    public String getTitle(){
+        return paramListName;
+    }
 
 }
