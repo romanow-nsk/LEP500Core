@@ -2,13 +2,13 @@ package romanow.abc.core.entity.subjectarea;
 
 import romanow.abc.core.entity.Entity;
 import romanow.abc.core.entity.EntityLink;
-import romanow.abc.core.entity.EntityRefList;
 import romanow.abc.core.entity.artifacts.Artifact;
 import romanow.abc.core.utils.GPSPoint;
 import romanow.abc.core.utils.OwnDateTime;
 import romanow.abc.core.utils.Pair;
 import romanow.lep500.FileDescription;
-import romanow.lep500.fft.FFTAudioTextFile;
+import romanow.lep500.FFTAudioTextFile;
+
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;

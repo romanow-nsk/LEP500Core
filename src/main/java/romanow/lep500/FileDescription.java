@@ -5,9 +5,8 @@ import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
 import romanow.abc.core.utils.GPSPoint;
-import romanow.lep500.fft.FFTAudioTextFile;
 
-public class FileDescription extends FFTAudioTextFile {
+public class FileDescription {
     public DateTime createDate = new DateTime();
     public String lepNumber="";         // Группа (из имени файла)
     public String srcNumber="";         // Имя датчика
