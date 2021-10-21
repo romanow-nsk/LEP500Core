@@ -18,9 +18,8 @@ public class FileDescription {
     private double fileFreq = 0;        // Частота измерений из файла
     private int measureCounter=0;       // Последовательный номер измерения
     private String parseError = "";
+    private String formatError="";
     public String validDescription(){
-        if ((!originalFileName.endsWith(".txt")))
-            return originalFileName + " - тип файла - не txt";
         String ss = "";
         if (powerLine.length()==0){
             if (ss.length()!=0) ss+="," ;
@@ -46,13 +45,16 @@ public class FileDescription {
             if (ss.length()!=0) ss+="," ;
             ss+=parseError;
             }
-        return ss.length()==0 ? null : "Формат: "+ss;
+        return ss.length()==0 ? "" : "Формат: "+ss;
         }
     public void parseFromName() {
+        formatError="";
         try{
             String ss = originalFileName;
-            if (!ss.endsWith(".txt"))
+            if (!ss.endsWith(".txt")){
+                formatError = originalFileName + " - тип файла - не txt";
                 return;
+                }
             ss = ss.substring(0,ss.length()-4);
             int idx=ss.indexOf("_");
             if (idx==-1)
@@ -137,6 +139,10 @@ public class FileDescription {
         return measureCounter; }
     public void setMeasureCounter(int measureCounter) {
         this.measureCounter = measureCounter; }
+    public String getFormatError() {
+        return formatError; }
+    public void setFormatError(String formatError) {
+        this.formatError = formatError; }
     //---------------------------------------------------------------------------------------------------------
     public static void main(String ss[]){
         FileDescription ff= new FileDescription("20210727T150304_316-4в_Изынский 245.txt");

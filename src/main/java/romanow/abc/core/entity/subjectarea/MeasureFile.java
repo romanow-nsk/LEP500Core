@@ -29,9 +29,9 @@ public class MeasureFile extends Entity {
     //--------------- Получение праметров записи из заголовка файла
     public Pair<String,FileDescription> loadMetaData(Artifact art, String path){
         FileDescription fd = new FileDescription(art.getOriginalName());
-        String zz = fd.validDescription();
-        if (zz!=null){
-            return new Pair<>(zz,null);
+        String error = fd.getFormatError();
+        if (error.length()!=0){
+            return new Pair<>(error,null);
             }
         String ss = path+"/"+art.createArtifactServerPath();
         BufferedReader reader = null;
@@ -39,6 +39,11 @@ public class MeasureFile extends Entity {
             reader = new BufferedReader(new InputStreamReader(new FileInputStream(ss),"Windows-1251"));
             FFTAudioTextFile file = new FFTAudioTextFile();
             file.readData(fd,reader);
+            error = fd.getFormatError();
+            if (error.length()!=0){
+                return new Pair<>(error,null);
+                }
+            reader.close();
             measureDate = fd.getCreateDate();
             sensor = fd.getSensor();
             measureCounter = fd.getMeasureCounter();
@@ -53,7 +58,7 @@ public class MeasureFile extends Entity {
                         reader.close();
                         } catch (Exception ee){}
                     }
-                return new Pair<>("Ошибка формата файла: "+ex.toString(),null);
+                return new Pair<>("Ошибка чтения файла: "+ex.toString(),null);
                 }
             }
     public String toString(){

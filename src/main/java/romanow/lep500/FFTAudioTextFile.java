@@ -113,34 +113,39 @@ public class FFTAudioTextFile implements FFTFileSource {
             }
         }
 
-    public void readData(FileDescription fd, BufferedReader AudioFile) throws IOException {
-        readHeader(fd,AudioFile);
-        sz = Integer.parseInt(AudioFile.readLine());
-        data = new double[sz];
-        double mid=0,min=data[0],max=data[0];
-        for(int i=0;i<sz;){
-            String ss=AudioFile.readLine();
-            if (ss.length()==0)
-                continue;
-            data[i]=Integer.parseInt(ss);
-            mid += data[i];
-            i++;
+    public void readData(FileDescription fd, BufferedReader AudioFile) {
+        try {
+            readHeader(fd, AudioFile);
+            sz = Integer.parseInt(AudioFile.readLine());
+            data = new double[sz];
+            double mid = 0, min = data[0], max = data[0];
+            for (int i = 0; i < sz; ) {
+                String ss = AudioFile.readLine();
+                if (ss.length() == 0)
+                    continue;
+                data[i] = Integer.parseInt(ss);
+                mid += data[i];
+                i++;
             }
-        int midd = (int)(mid/sz);
-        for(int i=0;i<sz;i++){         // Убрать постоянную составляющую
-            data[i] -= midd;
-        }
-        for(int i=0;i<sz;i++){
-            if (data[i]>max) max=data[i];
-            if (data[i]<min) min=data[i];
+            int midd = (int) (mid / sz);
+            for (int i = 0; i < sz; i++) {         // Убрать постоянную составляющую
+                data[i] -= midd;
             }
-        if (Math.abs(max)>Math.abs(min))
-            min = max;
-        min = Math.abs(min);
-        min = Short.MAX_VALUE*0.9f/min;
-        for(int i=0;i<sz;i++){
-            data[i] *= min;
+            for (int i = 0; i < sz; i++) {
+                if (data[i] > max) max = data[i];
+                if (data[i] < min) min = data[i];
             }
+            if (Math.abs(max) > Math.abs(min))
+                min = max;
+            min = Math.abs(min);
+            min = Short.MAX_VALUE * 0.9f / min;
+            for (int i = 0; i < sz; i++) {
+                data[i] *= min;
+                }
+            }catch (IOException ee){
+                fd.setFormatError("Ошибка: "+ee.toString());
+                try { AudioFile.close(); } catch (Exception ex){}
+                }
         }
     public boolean convertToWave(FileDescription fd, double freq, String outFile, String pathToFile, I_Notify back){
         fspec=null;
@@ -152,6 +157,11 @@ public class FFTAudioTextFile implements FFTFileSource {
         String in;
         try {
             readData(fd, AudioFile);
+            String error = fd.getFormatError();
+            if (error.length()!=0){
+                back.onMessage(error);
+                return false;
+                }
             String outname = outFile != null ? outFile : pathToFile;
             int k = outname.lastIndexOf(".");
             outname = outname.substring(0, k) + ".wav";
