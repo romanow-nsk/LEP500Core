@@ -13,6 +13,7 @@ import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 import romanow.abc.core.constants.ValuesBase;
 import romanow.abc.core.utils.GPSPoint;
+import romanow.abc.core.utils.OwnDateTime;
 import romanow.lep500.fft.FFTAudioSource;
 import romanow.lep500.fft.FFTFileSource;
 import romanow.lep500.fft.I_Notify;
@@ -57,15 +58,42 @@ public class FFTAudioTextFile implements FFTFileSource {
         String in;
         String dateTime = AudioFile.readLine();             // 0
         String groupTitle = AudioFile.readLine();           // 1
+        String line = fd.getPowerLine();
+        if (line.length()==0){
+            int idx=groupTitle.lastIndexOf("_");
+            if (idx==-1)
+                idx=groupTitle.lastIndexOf(" ");
+            if (idx==-1)
+                fd.setPowerLine(groupTitle);
+            else{
+                fd.setPowerLine(groupTitle.substring(0,idx));
+                fd.setSupport(groupTitle.substring(idx+1));
+                }
+            }
+        else{
+            if (fd.getSupport().length()==0){
+                if (groupTitle.startsWith(line)){
+                    fd.setSupport(groupTitle.substring(line.length()+1));
+                    }
+                }
+            }
+        if (!fd.getCreateDate().dateTimeValid()){
+            DateTimeFormatter formatter = DateTimeFormat.forPattern("dd-MM-yyyy' 'HH:mm:ss");
+            DateTime tt = formatter.parseDateTime(dateTime);
+            fd.setCreateDate(new OwnDateTime(tt.getMillis()));
+            }
         String geoY = AudioFile.readLine();                 // 2
         String geoX = AudioFile.readLine();                 // 3
-        int gpsState = Integer.parseInt(AudioFile.readLine());  // 4
-        if (gpsState == ValuesBase.GeoNone){
-            if (geoX.length()!=0)
-                fd.setGps(new GPSPoint(geoY,geoX,true));
-            }
-        else
-            fd.setGps(new GPSPoint(geoY,geoX,gpsState==ValuesBase.GeoGPS));
+        String gState = AudioFile.readLine();               // 4
+        try {
+            int gpsState = Integer.parseInt(gState);
+            if (gpsState == ValuesBase.GeoNone){
+                if (geoX.length()!=0)
+                    fd.setGps(new GPSPoint(geoY,geoX,true));
+                    }
+                else
+                    fd.setGps(new GPSPoint(geoY,geoX,gpsState==ValuesBase.GeoGPS));
+            } catch (Exception ee){}
         in = AudioFile.readLine();      // 5
         in = AudioFile.readLine();      // 6
         in = AudioFile.readLine();      // 7
@@ -77,10 +105,12 @@ public class FFTAudioTextFile implements FFTFileSource {
             fd.setFileFreq(Integer.parseInt(in)/100.);
             } catch (Exception ee){ fd.setFileFreq(100); }
         in = AudioFile.readLine();      // 9
+        if (fd.getSensor().length()==0){
         if (in.toLowerCase().startsWith(SensorPrefix))
             fd.setSensor(in.substring(SensorPrefix.length()));
         else
             fd.setSensor(in);
+            }
         }
 
     public void readData(FileDescription fd, BufferedReader AudioFile) throws IOException {
