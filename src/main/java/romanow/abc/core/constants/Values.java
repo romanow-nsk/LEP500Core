@@ -68,7 +68,7 @@ public class Values extends ValuesBase {
             };
         EntityFactory.put(new TableItem("Настройки", WorkSettings.class));
         EntityFactory.put(new TableItem("Измерение", MeasureFile.class));
-        EntityFactory.put(new TableItem("Опора", MeasureGroup.class).add("name"));
+        EntityFactory.put(new TableItem("Опора", Support.class).add("name"));
         EntityFactory.put(new TableItem("Линия", PowerLine.class).add("name"));
         EntityFactory.put(new TableItem("Параметры", LEP500Params.class));
         PrefixMap.put("MeasureFile.importDate","i");

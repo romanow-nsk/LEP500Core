@@ -16,21 +16,20 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class MeasureFile extends Entity {
-    private EntityLink<MeasureGroup> MeasureGroup = new EntityLink<>();
-    private OwnDateTime importDate = new OwnDateTime();                         // Время создания
+    private EntityLink<Support> MeasureGroup = new EntityLink<>();
     private EntityLink<Artifact> artifact = new EntityLink<>(Artifact.class);   // Файл волны
-    private String srcNumber="";                                                // Имя датчика
+    private OwnDateTime importDate = new OwnDateTime();                         // Время создания
+    private OwnDateTime measureDate = new OwnDateTime();                        // Время создания
+    private String sensor="";                                                // Имя датчика
     private String comment="";                                                  // Комментарий
     private GPSPoint gps = new GPSPoint();
     private double fileFreq = 0;                                                // Частота измерений из файла
-    private OwnDateTime measureDate = new OwnDateTime();                        // Время создания
-    private String fileSensorName="";                                           // Имя сенсора из файла
-    private int fileMeasureCounter=0;                                           // Последовательный номер измерения из файла
+    private int measureCounter=0;                                           // Последовательный номер измерения из файла
     //------------------------------------------------------------------------------------
     //--------------- Получение праметров записи из заголовка файла
     public Pair<String,FileDescription> loadMetaData(Artifact art, String path){
         FileDescription fd = new FileDescription(art.getOriginalName());
-        String zz = fd.parseFromName();
+        String zz = fd.validDescription();
         if (zz!=null){
             return new Pair<>(zz,null);
             }
@@ -40,13 +39,12 @@ public class MeasureFile extends Entity {
             reader = new BufferedReader(new InputStreamReader(new FileInputStream(ss),"Windows-1251"));
             FFTAudioTextFile file = new FFTAudioTextFile();
             file.readData(fd,reader);
-            measureDate = new OwnDateTime(fd.createDate.getMillis());
-            srcNumber = fd.srcNumber;
-            fileMeasureCounter = fd.fileMeasureCounter;
-            fileSensorName = fd.fileSensorName;
-            fileFreq = fd.fileFreq;
-            gps = fd.gps;
-            comment = fd.comment;
+            measureDate = fd.getCreateDate();
+            sensor = fd.getSensor();
+            measureCounter = fd.getMeasureCounter();
+            fileFreq = fd.getFileFreq();
+            gps = fd.getGps();
+            comment = fd.getComment();
             artifact.setOidRef(art);
             return new Pair<>(null,fd);
             } catch (IOException ex){
@@ -59,16 +57,16 @@ public class MeasureFile extends Entity {
                 }
             }
     public String toString(){
-        return getOid()+" "+fileSensorName+"("+fileMeasureCounter+") "+srcNumber+"/"+fileSensorName+" "+measureDate.dateTimeToString()+"/"+importDate.dateTimeToString();
+        return getOid()+" "+sensor+"("+measureCounter+") "+measureDate.dateTimeToString()+"/"+importDate.dateTimeToString();
         }
-    public EntityLink<romanow.abc.core.entity.subjectarea.MeasureGroup> getMeasureGroup() {
+    public EntityLink<Support> getMeasureGroup() {
         return MeasureGroup; }
     public OwnDateTime getImportDate() {
         return importDate; }
     public EntityLink<Artifact> getArtifact() {
         return artifact; }
-    public String getSrcNumber() {
-        return srcNumber; }
+    public String getSensor() {
+        return sensor; }
     public String getComment() {
         return comment; }
     public GPSPoint getGps() {
@@ -77,8 +75,6 @@ public class MeasureFile extends Entity {
         return fileFreq; }
     public OwnDateTime getMeasureDate() {
         return measureDate; }
-    public String getFileSensorName() {
-        return fileSensorName; }
-    public int getFileMeasureCounter() {
-        return fileMeasureCounter; }
+    public int getMeasureCounter() {
+        return measureCounter; }
 }

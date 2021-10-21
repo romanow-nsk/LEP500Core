@@ -5,7 +5,7 @@ import romanow.abc.core.entity.Entity;
 import romanow.abc.core.entity.EntityLink;
 import romanow.abc.core.entity.EntityRefList;
 
-public class MeasureGroup extends NamedEntity{
+public class Support extends NamedEntity{
     private int measureState = Values.MSUndefined;
     private EntityLink<PowerLine> PowerLine = new EntityLink<>();
     private EntityRefList<MeasureFile> files = new EntityRefList<>(MeasureFile.class);

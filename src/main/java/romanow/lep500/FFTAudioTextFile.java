@@ -13,9 +13,6 @@ import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 import romanow.abc.core.constants.ValuesBase;
 import romanow.abc.core.utils.GPSPoint;
-import romanow.lep500.FileDescription;
-import romanow.lep500.I_EventListener;
-import romanow.lep500.LEP500Params;
 import romanow.lep500.fft.FFTAudioSource;
 import romanow.lep500.fft.FFTFileSource;
 import romanow.lep500.fft.I_Notify;
@@ -58,37 +55,32 @@ public class FFTAudioTextFile implements FFTFileSource {
 
     public static void readHeader(FileDescription fd, BufferedReader AudioFile) throws IOException {
         String in;
-        fd.fileDateTime = AudioFile.readLine();             // 0
-        fd.fileGroupTitle = AudioFile.readLine();           // 1
-        if (fd.fileGroupTitle.startsWith(fd.lepNumber)){
-            fd.title = fd.fileGroupTitle.substring(fd.lepNumber.length()+1);
-            }
+        String dateTime = AudioFile.readLine();             // 0
+        String groupTitle = AudioFile.readLine();           // 1
         String geoY = AudioFile.readLine();                 // 2
         String geoX = AudioFile.readLine();                 // 3
         int gpsState = Integer.parseInt(AudioFile.readLine());  // 4
         if (gpsState == ValuesBase.GeoNone){
-            if (geoX.length()==0)
-                fd.gps = new GPSPoint();
-            else
-                fd.gps = new GPSPoint(geoY,geoX,true);
+            if (geoX.length()!=0)
+                fd.setGps(new GPSPoint(geoY,geoX,true));
             }
         else
-            fd.gps = new GPSPoint(geoY,geoX,gpsState==ValuesBase.GeoGPS);
+            fd.setGps(new GPSPoint(geoY,geoX,gpsState==ValuesBase.GeoGPS));
         in = AudioFile.readLine();      // 5
         in = AudioFile.readLine();      // 6
         in = AudioFile.readLine();      // 7
         try {
-            fd.fileMeasureCounter = Integer.parseInt(in);
-            } catch (Exception ee){ fd.fileMeasureCounter=0; }
+            fd.setMeasureCounter(Integer.parseInt(in));
+            } catch (Exception ee){ fd.setMeasureCounter(0); }
         in = AudioFile.readLine();      // 8
         try {
-            fd.fileFreq = Integer.parseInt(in)/100.;
-            } catch (Exception ee){ fd.fileFreq=100; }
+            fd.setFileFreq(Integer.parseInt(in)/100.);
+            } catch (Exception ee){ fd.setFileFreq(100); }
         in = AudioFile.readLine();      // 9
         if (in.toLowerCase().startsWith(SensorPrefix))
-            fd.fileSensorName = in.substring(SensorPrefix.length());
+            fd.setSensor(in.substring(SensorPrefix.length()));
         else
-            fd.fileSensorName = in;
+            fd.setSensor(in);
         }
 
     public void readData(FileDescription fd, BufferedReader AudioFile) throws IOException {
