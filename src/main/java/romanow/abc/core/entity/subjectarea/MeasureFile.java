@@ -16,7 +16,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class MeasureFile extends Entity {
-    private EntityLink<Support> MeasureGroup = new EntityLink<>();
+    private EntityLink<Support> Support = new EntityLink<>();
     private EntityLink<Artifact> artifact = new EntityLink<>(Artifact.class);   // Файл волны
     private OwnDateTime importDate = new OwnDateTime();                         // Время создания
     private OwnDateTime measureDate = new OwnDateTime();                        // Время создания
@@ -59,8 +59,8 @@ public class MeasureFile extends Entity {
     public String toString(){
         return getOid()+" "+sensor+"("+measureCounter+") "+measureDate.dateTimeToString()+"/"+importDate.dateTimeToString();
         }
-    public EntityLink<Support> getMeasureGroup() {
-        return MeasureGroup; }
+    public EntityLink<Support> getSupport() {
+        return Support; }
     public OwnDateTime getImportDate() {
         return importDate; }
     public EntityLink<Artifact> getArtifact() {
