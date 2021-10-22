@@ -250,11 +250,11 @@ public class FFTStatistic {
                 if (k3<k1 || k4>k2)
                     decrem = -1;
                 double dd = 0;
-                out.add(new Extreme(data[i],i,diff,(data[i]-trend[i]),power,power2,decrem));
+                out.data().add(new Extreme(data[i],i,diff,(data[i]-trend[i]),power,power2,decrem));
                 }
         try {
             ExtremeFacade facade=((ExtremeFacade) extremeFacade[mode].newInstance());
-            sort(out,facade.comparator());
+            sort(out.data(),facade.comparator());
             } catch (Exception ee){ }
         return out;
         }
@@ -289,11 +289,11 @@ public class FFTStatistic {
            if (k3<k1 || k4>k2)
                decrem = -1;
                double dd = 0;
-               out.add(new Extreme(data[i],i,diff,(data[i]-trend[i]),power,power2,decrem));
+               out.data().add(new Extreme(data[i],i,diff,(data[i]-trend[i]),power,power2,decrem));
                }
         try {
             ExtremeFacade facade=((ExtremeFacade) extremeFacade[mode].newInstance());
-            sort(out,facade.comparator());
+            sort(out.data(),facade.comparator());
             } catch (Exception ee){ }
         return out;
     }

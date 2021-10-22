@@ -18,6 +18,6 @@ public interface RestAPILEP500 {
     @POST("/api/lep500/measure/add")
     Call<MeasureFile> addMeasure(@Header("SessionToken") String token, @Query("artId") long id);
     /** Анализ группы измерений */
-    @GET("/api/lep500/analyse")
+    @POST("/api/lep500/analyse")
     Call<ArrayList<AnalyseResult>> analyse(@Header("SessionToken") String token, @Query("paramId") long paramId,@Body OidList body);
 }
