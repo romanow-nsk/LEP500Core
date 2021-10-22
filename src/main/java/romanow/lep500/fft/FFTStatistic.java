@@ -44,6 +44,8 @@ public class FFTStatistic {
     public final static int ExtremeTrendMode=2;
     public final static int ExtremePowerMode=3;
     public final static int ExtremePower2Mode=4;
+    private boolean valid=true;
+    private String message="";
     private double freqStep=0;
     private String name="";
     private int count=0;
@@ -79,6 +81,12 @@ public class FFTStatistic {
     public FFTStatistic(String name){
         setObjectName(name);
         reset();
+        }
+    public FFTStatistic(String name, boolean valid0, String mes){
+        setObjectName(name);
+        reset();
+        valid = valid0;
+        message = mes;
         }
     public void addStatistic(double src[]) throws Exception{
         double data[] = src.clone();
@@ -320,4 +328,12 @@ public class FFTStatistic {
     public void setFreqStep(double freqStep) {
         this.freqStep = freqStep;
         }
+    public String getMessage() {
+        return message; }
+    public void setMessage(String message) {
+        this.message = message; }
+    public boolean isValid() {
+        return valid; }
+    public void setValid(boolean valid) {
+        this.valid = valid; }
 }

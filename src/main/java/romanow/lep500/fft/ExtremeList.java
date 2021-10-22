@@ -1,6 +1,7 @@
 package romanow.lep500.fft;
 
-import romanow.abc.core.Pair;
+import romanow.abc.core.constants.Values;
+import romanow.abc.core.utils.Pair;
 import romanow.lep500.LEP500Params;
 
 import java.util.ArrayList;
@@ -10,11 +11,15 @@ public class ExtremeList extends ArrayList<Extreme> {
     public final static int StateRedIdx=1;
     public final static int StateYellowIdx=2;
     public final static int StateGreenIdx=3;
-    private ExtremeFacade facade;
+    private transient ExtremeFacade facade;
+    private int extremeMode=0;
+    private int testResult=0;
+    private String testComment="";
     public ExtremeFacade getFacade() {
         return facade;
         }
     public ExtremeList(int mode){
+        extremeMode = mode;
         try {
             facade = (ExtremeFacade)FFTStatistic.extremeFacade[mode].newInstance();
             } catch (Exception e) {
@@ -50,11 +55,13 @@ public class ExtremeList extends ArrayList<Extreme> {
             }
         ss+="после фильтрации: "+size()+"\n";
         //------------------------------------------------------------------------------------------
-        if (extreme.value<set.K1)
+        if (extreme.value<set.K1){
             ss+="п.1. Слабый сигнал\n";
+            return new Pair<>(ss, Values.MSLowLevel);
+            }
         if (size()==1) {
             ss+="п.2. Единственный пик";
-            return new Pair<>(ss, StateGreenIdx);
+            return new Pair<>(ss, Values.MSNormal);
             }
         boolean all=true;
         for(int i=1;i<size();i++) {
@@ -69,7 +76,7 @@ public class ExtremeList extends ArrayList<Extreme> {
             }
         if (all){
             ss+="п.3. Нет выраженного пика";
-            return new Pair<>(ss, StateGrayIdx);
+            return new Pair<>(ss, Values.MSNoPeak);
             }
         Extreme extreme1 = get(1);
         double f = extreme1.idx * freqStep;
@@ -80,7 +87,7 @@ public class ExtremeList extends ArrayList<Extreme> {
         dd *= val/val0;
         if (dd>set.K3){
             ss+="п.4. Смежный пик d="+String.format("%4.2f",dd);
-            return new Pair<>(ss, dd>set.K4 ? StateRedIdx : StateYellowIdx);
+            return new Pair<>(ss, dd>set.K4 ? Values.MSSecond1 : Values.MSSecond2);
             }
         double sum=0;
         for(int i=1;i<size();i++) {
@@ -96,6 +103,12 @@ public class ExtremeList extends ArrayList<Extreme> {
         if (sum==0) sum=0.01;
         double x = val0/sum;
         ss+=String.format("п.5. Взвешенная сумма %5.2f",x);
-        return new Pair<>(ss,x>set.K6 ? StateGreenIdx : (x<set.K7 ? StateRedIdx : StateYellowIdx));
+        return new Pair<>(ss,x>set.K6 ? Values.MSNormalMinus : (x<set.K7 ? Values.MSSumPeak1 : Values.MSSumPeak2));
         }
+    public int getExtremeMode() {
+        return extremeMode; }
+    public int getTestResult() {
+        return testResult; }
+    public String getTestComment() {
+        return testComment; }
 }
