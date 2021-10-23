@@ -1,5 +1,6 @@
 package romanow.abc.core.entity.subjectarea;
 
+import romanow.abc.core.constants.Values;
 import romanow.abc.core.entity.Entity;
 import romanow.abc.core.entity.EntityLink;
 import romanow.abc.core.entity.artifacts.Artifact;
@@ -20,13 +21,22 @@ public class MeasureFile extends Entity {
     private EntityLink<Artifact> artifact = new EntityLink<>(Artifact.class);   // Файл волны
     private OwnDateTime importDate = new OwnDateTime();                         // Время создания
     private OwnDateTime measureDate = new OwnDateTime();                        // Время создания
-    private String sensor="";                                                // Имя датчика
+    private String sensor="";                                                   // Имя датчика
+    private String powerLineName="";                                            // Линия
+    private String supportName="";                                              // Опора
     private String comment="";                                                  // Комментарий
     private GPSPoint gps = new GPSPoint();
+    private int expertResult= Values.MSUndefined;
     private double fileFreq = 0;                                                // Частота измерений из файла
     private int measureCounter=0;                                           // Последовательный номер измерения из файла
     //------------------------------------------------------------------------------------
     //--------------- Получение праметров записи из заголовка файла
+    public String getOriginalFileName(){
+        return artifact.getRef()==null ? "" : artifact.getRef().getOriginalName();
+        }
+    public String getTitle(){
+        return toString()+" ("+getOriginalFileName()+")";
+    }
     public Pair<String,FileDescription> loadMetaData(Artifact art, String path){
         FileDescription fd = new FileDescription(art.getOriginalName());
         String error = fd.getFormatError();
@@ -61,8 +71,11 @@ public class MeasureFile extends Entity {
                 return new Pair<>("Ошибка чтения файла: "+ex.toString(),null);
                 }
             }
+    private static String def(String ss){
+        return ss.length()==0 ? "..." : ss;
+    }
     public String toString(){
-        return getOid()+" "+sensor+"("+measureCounter+") "+measureDate.dateTimeToString()+"/"+importDate.dateTimeToString();
+        return def(powerLineName)+" / "+def(supportName)+" / "+def(sensor)+" ("+def(""+measureCounter)+")"+"\n"+measureDate.dateTimeToString();
         }
     public EntityLink<Support> getSupport() {
         return Support; }
@@ -82,4 +95,17 @@ public class MeasureFile extends Entity {
         return measureDate; }
     public int getMeasureCounter() {
         return measureCounter; }
+    public String getPowerLineName() {
+        return powerLineName; }
+    public void setPowerLineName(String powerLineName) {
+        this.powerLineName = powerLineName; }
+    public String getSupportName() {
+        return supportName; }
+    public int getExpertResult() {
+        return expertResult; }
+    public void setExpertResult(int expertResult) {
+        this.expertResult = expertResult; }
+    public void setSupportName(String supportName) {
+        this.supportName = supportName;
+    }
 }

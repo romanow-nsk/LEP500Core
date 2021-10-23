@@ -114,7 +114,7 @@ public class Values extends ValuesBase {
          */
        }
     //------------- Типы заключений о состоянии опоры --------------------------------------
-    @CONST(group = "MState", title = "Неопределено")
+    @CONST(group = "MState", title = "Не определено")
     public final static int MSUndefined = 0;
     @CONST(group = "MState", title = "Норма")           // Единственный пик
     public final static int MSNormal = 1;

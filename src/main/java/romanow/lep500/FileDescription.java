@@ -97,7 +97,7 @@ public class FileDescription {
         return ss.length()==0 ? "..." : ss;
         }
     public String toString(){
-        return def(powerLine)+"/"+def(support)+"/"+def(sensor)+"("+def(""+measureCounter)+")"+"\n"+createDate.dateTimeToString();
+        return def(powerLine)+" / "+def(support)+" / "+def(sensor)+" ("+def(""+measureCounter)+")"+"\n"+createDate.dateTimeToString();
         }
     public String measureMetaData(){
         return toString()+"\nГеолокация: "+gps.toString()+ "\nЧастота: "+String.format("%6.2f",fileFreq)+"\nКомментарий: "+comment;

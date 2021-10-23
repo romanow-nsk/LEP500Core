@@ -260,8 +260,8 @@ public class FFTStatistic {
         }
     //----------------------------------------------------------------------------------------------
     public ExtremeList createExtrems(int mode, int nFirst, int nLast, int trendPointsNum){
-        ExtremeList out = new ExtremeList(mode);
         double data[] = normalized.getOriginal();
+        ExtremeList out = new ExtremeList(mode);
         double trend[] = LEP500Utils.calcTrend(data,trendPointsNum);
         ArrayList<Integer> peaksIdx = createPeakIdxs(data,nFirst,nLast);
         for(int idx=1;idx<peaksIdx.size();idx+=2){

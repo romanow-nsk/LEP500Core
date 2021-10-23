@@ -5,5 +5,5 @@ public interface I_TrendData {
     public double[] getX();
     public double getX0();
     public double getDX();
-    public String getTitle();
+    public String getGraphTitle();
 }

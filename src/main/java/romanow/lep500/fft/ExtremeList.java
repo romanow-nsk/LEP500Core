@@ -16,14 +16,17 @@ public class ExtremeList extends DAO {
     public ExtremeFacade getFacade() {
         return facade;
         }
-    public ExtremeList(int mode){
-        extremeMode = mode;
+    private void createFacade(){
         try {
-            facade = (ExtremeFacade)FFTStatistic.extremeFacade[mode].newInstance();
+            facade = (ExtremeFacade)FFTStatistic.extremeFacade[extremeMode].newInstance();
             } catch (Exception e) {
                 facade = new ExtremeNull();
                 }
-            }
+        }
+    public ExtremeList(int mode){
+        extremeMode = mode;
+        createFacade();
+        }
     public Pair<String,Integer> testAlarm2(LEP500Params set, double freqStep){
         Extreme extreme = data.get(0);
         double f0 = extreme.idx*freqStep;
@@ -118,4 +121,34 @@ public class ExtremeList extends DAO {
         return testResult+" "+ testComment;
         }
     public ArrayList<Extreme> data(){ return data; }
+    public String showExtrems(double firstFreq,double lastFreq, double  freqStep){
+        createFacade();
+        String out="";
+        out += String.format("Диапазон экстремумов: %6.3f-%6.3f\n",firstFreq,lastFreq);
+        if (data().size()==0){
+            return "Экстремумов не найдено";
+            }
+        int count = data().size();
+        ExtremeFacade facade = getFacade();
+        facade.setExtreme(data().get(0));
+        double val0 = facade.getValue();
+        out += facade.getTitle()+"\n";
+        Extreme extreme = facade.extreme();
+        out += "Ампл     "+facade.getColName()+"    f(гц)     Декремент\n";
+        out += String.format("%6.3f   %6.3f    %6.3f"+(extreme.decSize==-1 ?"":"      %6.3f")+"\n",
+                extreme.value,facade.getValue(),
+                extreme.idx*freqStep, Math.PI*extreme.decSize/extreme.idx);
+        double sum=0;
+        for(int i=1; i<count;i++){
+            facade.setExtreme(data().get(i));
+            double proc = facade.getValue()*100/val0;
+            sum+=proc;
+            extreme = facade.extreme();
+            out += String.format("%6.3f   %6.3f    %6.3f"+(extreme.decSize==-1 ?"":"      %6.3f")+"\n",
+                    extreme.value,facade.getValue(),
+                    extreme.idx*freqStep, Math.PI*extreme.decSize/extreme.idx);
+            }
+        out += String.format("Средний - %d%% к первому\n",(int)(sum/(count-1)));
+        return out;
+        }
 }
