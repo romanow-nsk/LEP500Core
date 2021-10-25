@@ -7,6 +7,8 @@ import org.joda.time.format.DateTimeFormatter;
 import romanow.abc.core.utils.GPSPoint;
 import romanow.abc.core.utils.OwnDateTime;
 
+import java.util.Locale;
+
 public class FileDescription {
     private OwnDateTime createDate = new OwnDateTime(false);
     private String powerLine="";        // Группа (из имени файла)
@@ -50,7 +52,7 @@ public class FileDescription {
     public void parseFromName() {
         formatError="";
         try{
-            String ss = originalFileName;
+            String ss = originalFileName.toLowerCase(Locale.ROOT);
             if (!ss.endsWith(".txt")){
                 formatError = originalFileName + " - тип файла - не txt";
                 return;
@@ -103,7 +105,7 @@ public class FileDescription {
         return toString()+"\nГеолокация: "+gps.toString()+ "\nЧастота: "+String.format("%6.2f",fileFreq)+"\nКомментарий: "+comment;
         }
     public FileDescription(String fname){
-        originalFileName = fname.toLowerCase();
+        originalFileName = fname;
         parseFromName();
         }
     public OwnDateTime getCreateDate() {
