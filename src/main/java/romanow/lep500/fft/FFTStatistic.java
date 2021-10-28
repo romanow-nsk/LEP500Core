@@ -7,6 +7,7 @@ package romanow.lep500.fft;
 
 // Сбор статистики по слою
 
+import romanow.lep500.LEP500Params;
 import romanow.lep500.LEP500Utils;
 
 import java.util.ArrayList;
@@ -47,6 +48,7 @@ public class FFTStatistic {
     private boolean valid=true;
     private String message="";
     private double freqStep=0;
+    private double freq=0;
     private String name="";
     private int count=0;
     private int size=0;
@@ -181,6 +183,8 @@ public class FFTStatistic {
         return getMid(getDiffsT());
         }
     public double[] getNormalized() { return normalized.data; }
+    public double getFreq() { return freq; }
+    public void setFreq(double freq) { this.freq = freq; }
 
     private void sort(ArrayList<Extreme> list, Comparator<Extreme> comparator){
         int sz = list.size();
@@ -259,6 +263,9 @@ public class FFTStatistic {
         return out;
         }
     //----------------------------------------------------------------------------------------------
+    public ExtremeList createExtrems(int mode, LEP500Params set) {
+        return createExtrems(mode,noFirstPoints(set),noLastPoints(set),set.nTrendPoints);
+        }
     public ExtremeList createExtrems(int mode, int nFirst, int nLast, int trendPointsNum){
         double data[] = normalized.getOriginal();
         ExtremeList out = new ExtremeList(mode);
@@ -336,4 +343,10 @@ public class FFTStatistic {
         return valid; }
     public void setValid(boolean valid) {
         this.valid = valid; }
-}
+    public int noFirstPoints(LEP500Params params){
+        return  (int)(params.FirstFreq/freqStep);
+        }
+    public int noLastPoints(LEP500Params params){
+        return (int)((freq/2-params.LastFreq)/freqStep);
+        }
+    }
