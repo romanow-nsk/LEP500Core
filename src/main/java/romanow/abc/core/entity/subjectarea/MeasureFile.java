@@ -28,7 +28,8 @@ public class MeasureFile extends Entity {
     private GPSPoint gps = new GPSPoint();
     private int expertResult= Values.MSUndefined;
     private double fileFreq = 0;                                                // Частота измерений из файла
-    private int measureCounter=0;                                           // Последовательный номер измерения из файла
+    private int measureCounter=0;                                               // Последовательный номер измерения из файла
+    public MeasureFile(){}
     //------------------------------------------------------------------------------------
     //--------------- Получение праметров записи из заголовка файла
     public String getOriginalFileName(){
