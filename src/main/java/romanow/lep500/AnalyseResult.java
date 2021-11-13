@@ -58,6 +58,11 @@ public class AnalyseResult extends DAO implements I_TrendData{
         for(ExtremeList dd : data)
             ss += dd.toString()+"\n";
         return ss;
-    }
-
+        }
+    public String toStringFull() {
+        String ss = getTitle() + "\n" + message + "\n";
+        for (ExtremeList dd : data)
+            ss += dd.showExtrems(firstFreq, lastFreq, dFreq) + "\n";
+        return ss;
+        }
 }

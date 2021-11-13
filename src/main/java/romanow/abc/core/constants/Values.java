@@ -17,6 +17,7 @@ public class Values extends ValuesBase {
     //-----------------------------------------------------------------------------
     public static void init() {
         ValuesBase.init();
+        System.out.println("Инициализация Values");
         }
     public final static int PopupMessageDelay=6;                // Тайм-аут всплывающего окна
     public final static int PopupLongDelay=20;                  // Тайм-аут всплывающего окна
