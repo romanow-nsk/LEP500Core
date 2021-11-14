@@ -123,7 +123,7 @@ public class FFTAudioTextFile implements FFTFileSource {
                 String ss = AudioFile.readLine();
                 if (ss.length() == 0)
                     continue;
-                data[i] = Integer.parseInt(ss);
+                data[i] = Double.parseDouble(ss);
                 mid += data[i];
                 i++;
             }
