@@ -28,7 +28,7 @@ public class Values extends ValuesBase {
             "romanow.abc.dataserver.LEP500ConsoleServer",
             "romanow.abc.desktop.LEP500Cabinet",
             "romanow.abc.desktop.LEP500Client",
-            "",""};
+            "","",""};
     private  final static String lep500AppNames[]={
             "lep500",
             "lep500",
