@@ -341,6 +341,8 @@ public class FFTAudioTextFile implements FFTFileSource {
     public void createTestMeasure(){
         int v0=1000;
         int ampl = 200;
+        sz=10000;
+        data = new double[sz];
         // 2pi = 100гц = 10 мс, 2 гц = 500 мс, период = 250 отсчетов
         for(int i=0;i<data.length;i++){
             data[i]=(short) (v0/5+1000*Math.sin(i*2*Math.PI/25.)+500*Math.sin(i*2*Math.PI/10.));
