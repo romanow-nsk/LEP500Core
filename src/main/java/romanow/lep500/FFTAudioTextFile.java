@@ -50,10 +50,17 @@ public class FFTAudioTextFile implements FFTFileSource {
             wav_file.write((byte)cc[i]);
             }
         }
-    public double[]  getData(){
+    public double[] getData(){
         return data.clone();
         }
-
+    public void setData(double dd[]){
+        data = dd.clone();
+        }
+    public void setData(short dd[]){
+        data = new double[dd.length];
+        for(int i=0;i<dd.length;i++)
+            data[i]=dd[i];
+        }
     public static void readHeader(FileDescription fd, BufferedReader AudioFile) throws IOException {
         String in;
         String dateTime = AudioFile.readLine();             // 0
