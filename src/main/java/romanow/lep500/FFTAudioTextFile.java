@@ -325,7 +325,6 @@ public class FFTAudioTextFile implements FFTFileSource {
     //------------------------------------------------------------------------------------------ LEP500File
     public final static String SensorPrefix="канал-";
     private DateTime createDate = new DateTime();
-    private short sensorData[];
     private LEP500Params settings;
     private String sensorName;
     private GPSPoint gps;
@@ -336,10 +335,6 @@ public class FFTAudioTextFile implements FFTFileSource {
         }
     public LEP500Params getSettings() {
         return settings; }
-    public void setSensorData(short data0[]){
-        sensorData = data0;
-    }
-    public short []getSensorData(){  return sensorData; }
     public String createOriginalFileName(){
         DateTimeFormatter dtf = DateTimeFormat.forPattern("yyyyMMdd");
         DateTimeFormatter dtf2 = DateTimeFormat.forPattern("HHmmss");
