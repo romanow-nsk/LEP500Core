@@ -31,6 +31,9 @@ public class FFTArray {
             return 0;
         return (double)(Math.sqrt(diff[i])/count);
         }
+    public void incCount(){
+        count++;
+        }
     public int getCount(){
         return count;
         }
@@ -72,27 +75,30 @@ public class FFTArray {
             max = value;
         }
 
-    public String deciBellToString(){
-        return deciBells(calcMaxAbs())+" db / "+deciBells(calcMaxesMidAbs())+" db / "+deciBells(calcMidAbs())+" db";
+    public String deciBellToString(boolean spector){
+        return deciBells(calcMaxAbs(spector))+" db / "+deciBells(calcMaxesMidAbs(spector))+" db / "+deciBells(calcMidAbs(spector))+" db";
         }
-    public double calcMaxAbs(){
+    public double calcMaxAbs(boolean spector){
+        int sz = spector ? data.length : 1;
         double max = 0;
         for(int i=0;i<data.length;i++){
             double vv = Math.abs(data[i]);
             if (vv > max)
                 max = vv;
             }
-        return max/count;
+        return max/count*sz;
         }
-    public double calcMidAbs(){
+    public double calcMidAbs(boolean spector){
+        int sz = spector ? data.length : 1;
         double sum = 0;
         for(int i=0;i<data.length;i++){
             double vv = Math.abs(data[i]);
             sum += vv;
             }
-        return sum/data.length/count;
+        return sum/data.length/count*sz;
         }
-    public double calcMaxesMidAbs(){
+    public double calcMaxesMidAbs(boolean spector){
+        int sz = spector ? data.length : 1;
         double sum = 0;
         int cnt=0;
         for(int i=1;i<data.length-1;i++){
@@ -104,7 +110,7 @@ public class FFTArray {
                 sum += vv;
                 }
             }
-        return cnt==0 ? 0 : sum/count/cnt;
+        return cnt==0 ? 0 : sum/count/cnt*sz;
         }
     public static int deciBells(double vv){
         int maxInt = 0x7FFF;

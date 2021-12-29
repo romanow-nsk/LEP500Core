@@ -90,11 +90,14 @@ public class FFTStatistic {
                 sum2DiffT.data[i]+=(data[i]-prev[i])*(data[i]-prev[i]);
             if (i!=0 && i!=size-1){
                 sum2DiffF.data[i]+=(data[i]-data[i-1])*(data[i]-data[i-1]);
-                sum2DiffF.data[i]+=(data[i]-data[i+1])*(data[i]-data[i+1]);
                 }
             }
         prev = data;
         count++;
+        sumT.incCount();
+        sum2T.incCount();
+        sum2DiffF.incCount();
+        sum2DiffT.incCount();
         }
     public int getCount(){
         return count;

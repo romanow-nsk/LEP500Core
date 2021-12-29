@@ -57,7 +57,7 @@ public class ExtremeList extends DAO {
         testComment+="после фильтрации: "+data.size()+"\n";
         //------------------------------------------------------------------------------------------
         if (extreme.value<set.K1){
-            testComment+="п.1. Слабый сигнал\n";
+            testComment+="п.1. Слабый сигнал";
             testResult = Values.MSLowLevel;
             return new Pair<>(testComment, testResult);
             }

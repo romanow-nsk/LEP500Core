@@ -121,7 +121,7 @@ public class FFTAudioTextFile implements FFTFileSource {
         }
 
     public void readData(FileDescription fd, BufferedReader AudioFile) {
-
+        readData(fd,AudioFile,true);
         }
     public void readData(FileDescription fd, BufferedReader AudioFile, boolean normalize) {
         try {
