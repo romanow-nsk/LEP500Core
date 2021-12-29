@@ -121,6 +121,9 @@ public class FFTAudioTextFile implements FFTFileSource {
         }
 
     public void readData(FileDescription fd, BufferedReader AudioFile) {
+
+        }
+    public void readData(FileDescription fd, BufferedReader AudioFile, boolean normalize) {
         try {
             readHeader(fd, AudioFile);
             sz = Integer.parseInt(AudioFile.readLine());
@@ -133,15 +136,17 @@ public class FFTAudioTextFile implements FFTFileSource {
                 data[i] = Double.parseDouble(ss);
                 mid += data[i];
                 i++;
-            }
+                }
             int midd = (int) (mid / sz);
             for (int i = 0; i < sz; i++) {         // Убрать постоянную составляющую
                 data[i] -= midd;
-            }
+                }
+            if (!normalize)
+                return;
             for (int i = 0; i < sz; i++) {
                 if (data[i] > max) max = data[i];
                 if (data[i] < min) min = data[i];
-            }
+                }
             if (Math.abs(max) > Math.abs(min))
                 min = max;
             min = Math.abs(min);

@@ -15,24 +15,6 @@ import java.util.Comparator;
 
 
 public class FFTStatistic {
-    class SmoothArray extends FFTArray{
-        public SmoothArray(int size){
-            super(size);
-            }
-        void smoothOne(){
-            int size = data.length;
-            double out[] = new double[size];
-            out[0]=(double)( 0.5*(data[1]+data[0]));
-            for(int i=1;i<size-1;i++)
-                out[i] = (double)( 0.5*(0.5*(data[i-1]+data[i+1])+data[i]));
-            out[size-1]=(double)( 0.5*(data[size-2]+data[size-1]));
-            data = out;
-            }
-        void smooth(int count){
-            while (count-->0)
-                smoothOne();
-            }
-        }
     public static Class extremeFacade[] = new Class[]{
         ExtremeAbs.class,
         ExtremeDiff.class,
@@ -54,6 +36,7 @@ public class FFTStatistic {
     private int size=0;
     private boolean noReset=true;
     private double prev[]=null;
+    private FFTArray wave=null;             // Оригинальная волна
     private SmoothArray sumT=null;          // Сумма по времени
     private SmoothArray sum2T=null;         // Сумма квадратов по времени
     private SmoothArray sum2DiffF=null;     // Корреляция по частоте
@@ -74,6 +57,13 @@ public class FFTStatistic {
         sum2DiffF=new SmoothArray(size);
         sum2DiffT=new SmoothArray(size);
         }
+
+    public FFTArray getSumT(){
+        return sumT; }
+    public FFTArray getWave() {
+        return wave; }
+    public void setWave(FFTArray wave) {
+        this.wave = wave; }
     public void smooth(int steps){
         sumT.smooth(steps);
         sum2T.smooth(steps);
@@ -152,7 +142,7 @@ public class FFTStatistic {
                 max = vv;
         return max;
         }
-    public void normalizelFinish(double max){
+    public void normalizeFinish(double max){
         for(int i=0;i<normalized.data.length;i++)
             normalized.data[i]/=max;
         }

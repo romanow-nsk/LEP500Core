@@ -43,6 +43,14 @@ public class FFTArray {
         diff = new double[size];
         clear();
         }
+    public FFTArray(double dd[]){
+        data = dd;
+        diff = new double[dd.length];
+        for (int i=0;i<data.length;i++){
+            diff[i]=0;
+            }
+        count=1;
+        }
     public void clearMax(){
         max=0;
         }
@@ -64,14 +72,43 @@ public class FFTArray {
             max = value;
         }
 
-    public void calcMax(){
-        double max = data[0];
-        count = data.length;
+    public String deciBellToString(){
+        return deciBells(calcMaxAbs())+" db / "+deciBells(calcMaxesMidAbs())+" db / "+deciBells(calcMidAbs())+" db";
+        }
+    public double calcMaxAbs(){
+        double max = 0;
         for(int i=0;i<data.length;i++){
-            diff[i]=0;
-            if (data[i] > max)
-                max = data[i];
+            double vv = Math.abs(data[i]);
+            if (vv > max)
+                max = vv;
             }
+        return max/count;
+        }
+    public double calcMidAbs(){
+        double sum = 0;
+        for(int i=0;i<data.length;i++){
+            double vv = Math.abs(data[i]);
+            sum += vv;
+            }
+        return sum/data.length/count;
+        }
+    public double calcMaxesMidAbs(){
+        double sum = 0;
+        int cnt=0;
+        for(int i=1;i<data.length-1;i++){
+            double vv = Math.abs(data[i]);
+            double vv1 = Math.abs(data[i-1]);
+            double vv2 = Math.abs(data[i+1]);
+            if (vv > vv1 && vv > vv2){
+                cnt++;
+                sum += vv;
+                }
+            }
+        return cnt==0 ? 0 : sum/count/cnt;
+        }
+    public static int deciBells(double vv){
+        int maxInt = 0x7FFF;
+        return (int)(20*Math.log10(vv/maxInt));
         }
     public void normalize(double k){
         for (int i=0;i<data.length;i++)
