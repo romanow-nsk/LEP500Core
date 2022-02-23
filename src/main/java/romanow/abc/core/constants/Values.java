@@ -1,13 +1,31 @@
 package romanow.abc.core.constants;
 
 import romanow.abc.core.UniException;
+import romanow.abc.core.entity.EntityIndexedFactory;
 import romanow.abc.core.entity.base.WorkSettingsBase;
 import romanow.abc.core.entity.subjectarea.*;
 import romanow.abc.core.entity.users.User;
 import romanow.lep500.LEP500Params;
 
+import java.util.HashMap;
+
 
 public class Values extends ValuesBase {
+    private static Values two=null;
+    private Values(){
+        super();
+        System.out.println("Инициализация Values");
+        initEnvTwo();
+        getConstMap().createConstList(this);
+        }
+    public final static Values init(){
+        if (two == null){
+            two = new Values();
+            setOne(two);
+            }
+        return two;
+        }
+
     // 1. Константы наследуются (аннотации)
     // 2. Массивы строк перекрываются
     // 3. статическая инициализация наследуется
@@ -15,10 +33,6 @@ public class Values extends ValuesBase {
     //----------- Данные ПЛК вне мета-системы -------------------------------------
     public final static String ESSStateIcon[]={"/ess_none.png","/ess_off.png","/ess_on.png"};
     //-----------------------------------------------------------------------------
-    public static void init() {
-        ValuesBase.init();
-        System.out.println("Инициализация Values");
-        }
     public final static int PopupMessageDelay=6;                // Тайм-аут всплывающего окна
     public final static int PopupLongDelay=20;                  // Тайм-аут всплывающего окна
     private  final static String lep500ClassNames[]={
@@ -40,8 +54,8 @@ public class Values extends ValuesBase {
             "/drawable/lep500min.png",
             "Опоры России"
             };
-    static {
-        env = new I_Environment() {
+    private void initEnvTwo(){
+        I_Environment env = new I_Environment() {
             @Override
             public String applicationClassName(int classType) {
                 return lep500ClassNames[classType];
@@ -67,11 +81,14 @@ public class Values extends ValuesBase {
             @Override
             public WorkSettingsBase currentWorkSettings() { return new WorkSettings(); }
             };
+        setEnv(env);
+        EntityIndexedFactory EntityFactory = getEntityFactory();
         EntityFactory.put(new TableItem("Настройки", WorkSettings.class));
         EntityFactory.put(new TableItem("Измерение", MeasureFile.class));
         EntityFactory.put(new TableItem("Опора", Support.class).add("name"));
         EntityFactory.put(new TableItem("Линия", PowerLine.class).add("name"));
         EntityFactory.put(new TableItem("Параметры", LEP500Params.class));
+        HashMap<String,String> PrefixMap = getPrefixMap();
         PrefixMap.put("MeasureFile.importDate","i");
         PrefixMap.put("MeasureFile.measureDate","m");
         PrefixMap.put("MeasureFile.gps","g");
@@ -144,6 +161,6 @@ public class Values extends ValuesBase {
     public static void main(String a[]){
         Values.init();
         System.out.println(title("User", UserAdminType));
-        System.out.print(constMap.toString());
+        System.out.print(Values.constMap().toString());
         }
 }
