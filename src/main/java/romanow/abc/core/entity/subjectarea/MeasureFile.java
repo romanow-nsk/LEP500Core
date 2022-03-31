@@ -62,6 +62,7 @@ public class MeasureFile extends Entity {
             gps = fd.getGps();
             comment = fd.getComment();
             artifact.setOidRef(art);
+            expertResult = fd.getExpertNote();
             return new Pair<>(null,fd);
             } catch (IOException ex){
                 if (reader!=null){
