@@ -131,7 +131,7 @@ public class Values extends ValuesBase {
         PrefixMap.put("ESSNode.innerTestTime","i");
          */
        }
-    //------------- Типы заключений о состоянии опоры --------------------------------------
+    //------------- Типы заключений АЛГОРИТМА о состоянии опоры --------------------------------------
     @CONST(group = "MState", title = "Не определено")
     public final static int MSUndefined = 0;
     @CONST(group = "MState", title = "Норма")           // Единственный пик
@@ -152,6 +152,27 @@ public class Values extends ValuesBase {
     public final static int MSSumPeak2 = 8;
     @CONST(group = "MState", title = "Норма-")          // Первый пик проходит
     public final static int MSNormalMinus = 9;
+    //------------- Типы заключений ЭКСПЕРТА о спектре состояния опоры --------------------------------------
+    @CONST(group = "EState", title = "Не поддерживается")
+    public final static int ESNotSupported = 0;
+    @CONST(group = "EState", title = "Нет оценки")
+    public final static int ESNotSet = 1;
+    @CONST(group = "EState", title = "Нестандартное")   // Аномальный случай
+    public final static int ESAnomal = 2;
+    @CONST(group = "EState", title = "Зашумлено")       // После фильтрации нет пиков
+    public final static int MENoise = 3;
+    @CONST(group = "EState", title = "Слабый сигнал")   // Низкий уровень относительного мнимого
+    public final static int MELowLevel = 4;
+    @CONST(group = "EState", title = "Идеальное")       // Идеальная форма спектра
+    public final static int MEIdeal = 5;
+    @CONST(group = "EState", title = "Норма")           // Соответствует норме
+    public final static int MENormal = 6;
+    @CONST(group = "EState", title = "Удовлетворительное") // На границе нормы
+    public final static int MEValid = 7;
+    @CONST(group = "EState", title = "Предупреждение")  // На границе авариной
+    public final static int MEWarning = 8;
+    @CONST(group = "EState", title = "Аварийное")       // Аварийное
+    public final static int MEFailure = 9;
     //------------- Типы пользователей -----------------------------------------------------
     @CONST(group = "User", title = "Аналитик")
     public final static int UserLEP500Analytic = 3;

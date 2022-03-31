@@ -4,6 +4,7 @@ import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
+import romanow.abc.core.constants.Values;
 import romanow.abc.core.utils.GPSPoint;
 import romanow.abc.core.utils.OwnDateTime;
 
@@ -21,6 +22,7 @@ public class FileDescription {
     private int measureCounter=0;       // Последовательный номер измерения
     private String parseError = "";
     private String formatError="";
+    private int expertNote = Values.ESNotSet;   // Экспертная оценка
     public String validDescription(){
         String ss = "";
         if (powerLine.length()==0){
@@ -148,6 +150,10 @@ public class FileDescription {
         return formatError; }
     public void setFormatError(String formatError) {
         this.formatError = formatError; }
+    public int getExpertNote() {
+        return expertNote;}
+    public void setExpertNote(int expertNote) {
+        this.expertNote = expertNote;}
     //---------------------------------------------------------------------------------------------------------
     public static void main(String ss[]){
         FileDescription ff= new FileDescription("20210727T150304_316-4в_Изынский 245.txt");

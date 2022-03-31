@@ -11,6 +11,7 @@ import java.io.*;
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
+import romanow.abc.core.constants.Values;
 import romanow.abc.core.constants.ValuesBase;
 import romanow.abc.core.utils.GPSPoint;
 import romanow.abc.core.utils.OwnDateTime;
@@ -27,7 +28,8 @@ public class FFTAudioTextFile implements FFTFileSource {
     protected String fspec=null;
     protected int sz=0;
     protected double data[]=null;
-    protected int nPoints=0;             // Количество точек для удаления тренда
+    protected int nPoints=0;                    // Количество точек для удаления тренда
+    private int expertNote = Values.ESNotSet;   // Экспертная оценка
     //--------------------------------------------------------------------------------------
     private transient int cnum;
     private transient BufferedReader AudioFile=null;
@@ -61,6 +63,10 @@ public class FFTAudioTextFile implements FFTFileSource {
         for(int i=0;i<dd.length;i++)
             data[i]=dd[i];
         }
+    public int getExpertNote() {
+        return expertNote;}
+    public void setExpertNote(int expertNote) {
+        this.expertNote = expertNote;}
     public static void readHeader(FileDescription fd, BufferedReader AudioFile) throws IOException {
         String in;
         String dateTime = AudioFile.readLine();             // 0
@@ -103,6 +109,10 @@ public class FFTAudioTextFile implements FFTFileSource {
             } catch (Exception ee){}
         in = AudioFile.readLine();      // 5
         in = AudioFile.readLine();      // 6
+        try {
+            int vv = Integer.parseInt(in);
+            fd.setExpertNote(vv);
+            } catch (Exception ee){ fd.setMeasureCounter(Values.ESNotSupported); }
         in = AudioFile.readLine();      // 7
         try {
             fd.setMeasureCounter(Integer.parseInt(in));
@@ -382,7 +392,7 @@ public class FFTAudioTextFile implements FFTFileSource {
             os.write("16 бит");
             os.newLine();
             //6 1
-            os.write("1");
+            os.write(""+expertNote);
             os.newLine();
             //7
             os.write(""+settings.measureCounter);
