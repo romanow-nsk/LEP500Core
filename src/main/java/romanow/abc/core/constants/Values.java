@@ -29,7 +29,7 @@ public class Values extends ValuesBase {
     // 1. Константы наследуются (аннотации)
     // 2. Массивы строк перекрываются
     // 3. статическая инициализация наследуется
-    private final static int LEP500ReleaseNumber=6;                  // номер сборки сервера
+    private final static int LEP500ReleaseNumber=8;                  // номер сборки сервера
     //----------- Данные ПЛК вне мета-системы -------------------------------------
     public final static String ESSStateIcon[]={"/ess_none.png","/ess_off.png","/ess_on.png"};
     //-----------------------------------------------------------------------------

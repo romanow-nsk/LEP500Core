@@ -8,6 +8,7 @@ package romanow.lep500.fft;
 // Сбор статистики по слою
 
 import romanow.abc.core.constants.Values;
+import romanow.lep500.FileDescription;
 import romanow.lep500.LEP500Params;
 import romanow.lep500.LEP500Utils;
 
@@ -43,7 +44,7 @@ public class FFTStatistic {
     private SmoothArray sum2DiffF=null;     // Корреляция по частоте
     private SmoothArray sum2DiffT=null;     // Корреляция по времени
     private SmoothArray normalized = null;
-    private int expertNode= Values.ESNotSet;
+    private FileDescription fileDescription = new FileDescription("");
     public void reset() {
         noReset=true;
         }
@@ -344,8 +345,8 @@ public class FFTStatistic {
     public int noLastPoints(LEP500Params params){
         return (int)((freq/2-params.LastFreq)/freqStep);
         }
-    public int getExpertNode() {
-        return expertNode;}
-    public void setExpertNode(int expertNode) {
-        this.expertNode = expertNode;}
+    public FileDescription getFileDescription() {
+        return fileDescription;}
+    public void setFileDescription(FileDescription fileDescription) {
+        this.fileDescription = fileDescription; }
 }

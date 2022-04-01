@@ -20,4 +20,7 @@ public interface RestAPILEP500 {
     /** Анализ группы измерений */
     @POST("/api/lep500/analyse")
     Call<ArrayList<AnalyseResult>> analyse(@Header("SessionToken") String token, @Query("paramId") long paramId,@Body OidList body);
+    /** Изменить экспертную оценку  */
+    @POST("/api/lep500/measure/expertnote/set")
+    Call<JEmpty> setExpertNote(@Header("SessionToken") String token, @Query("measureId") long id, @Query("note") int note);
 }

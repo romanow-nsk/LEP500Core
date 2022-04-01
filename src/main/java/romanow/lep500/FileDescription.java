@@ -8,6 +8,8 @@ import romanow.abc.core.constants.Values;
 import romanow.abc.core.utils.GPSPoint;
 import romanow.abc.core.utils.OwnDateTime;
 
+import java.io.*;
+import java.util.ArrayList;
 import java.util.Locale;
 
 public class FileDescription {
@@ -154,6 +156,40 @@ public class FileDescription {
         return expertNote;}
     public void setExpertNote(int expertNote) {
         this.expertNote = expertNote;}
+    public String refreshExpertNoteInFile(String path){
+        BufferedReader reader = null;
+        BufferedWriter writer = null;
+        ArrayList<String> list = new ArrayList<>();
+        try {
+            path = path==null ? "" : path+"/";
+            reader = new BufferedReader(new InputStreamReader(new FileInputStream(path+originalFileName), "Windows-1251"));
+            String ss;
+            for(int i=0;i<6;i++){
+                ss=reader.readLine();
+                list.add(ss);
+                }
+            reader.readLine();
+            list.add(""+expertNote);
+            while((ss=reader.readLine())!=null)
+                list.add(ss);
+            reader.close();
+            reader = null;
+            writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(path+originalFileName), "Windows-1251"));
+            for(String cc : list){
+                writer.write(cc);
+                writer.newLine();
+                }
+            writer.close();
+            return null;
+            } catch (Exception ee){
+                try {
+                    if (reader!=null) reader.close();
+                    if (writer!=null) writer.close();
+                    return "Ошибка чтения/записи\n"+path+originalFileName+"\n"+ee.toString();
+                    } catch (Exception e){}
+                }
+        return null;
+        }
     //---------------------------------------------------------------------------------------------------------
     public static void main(String ss[]){
         FileDescription ff= new FileDescription("20210727T150304_316-4в_Изынский 245.txt");
