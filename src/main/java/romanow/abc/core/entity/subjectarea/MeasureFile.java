@@ -29,6 +29,7 @@ public class MeasureFile extends Entity {
     private int expertResult= Values.MSUndefined;
     private double fileFreq = 0;                                                // Частота измерений из файла
     private int measureCounter=0;                                               // Последовательный номер измерения из файла
+    private long userId=0;                                                      // Собственник файла
     public MeasureFile(){}
     //------------------------------------------------------------------------------------
     //--------------- Получение праметров записи из заголовка файла
@@ -107,6 +108,10 @@ public class MeasureFile extends Entity {
         return expertResult; }
     public void setExpertResult(int expertResult) {
         this.expertResult = expertResult; }
+    public long getUserID() {
+        return userId;}
+    public void setUserID(long userID) {
+        this.userId = userID;}
     public void setSupportName(String supportName) {
         this.supportName = supportName;
     }
