@@ -17,13 +17,7 @@ import java.util.Comparator;
 
 
 public class FFTStatistic {
-    public static Class extremeFacade[] = new Class[]{
-        ExtremeAbs.class,
-        ExtremeDiff.class,
-        ExtremeTrend.class,
-        ExtremePower.class,
-        ExtremePower2.class
-        };
+
     public final static int ExtremeAbsMode=0;
     public final static int ExtremeDiffMode=1;
     public final static int ExtremeTrendMode=2;
@@ -253,7 +247,7 @@ public class FFTStatistic {
                 out.data().add(new Extreme(data[i],i,diff,(data[i]-trend[i]),power,power2,decrem));
                 }
         try {
-            ExtremeFacade facade=((ExtremeFacade) extremeFacade[mode].newInstance());
+            ExtremeFacade facade=((ExtremeFacade) Values.extremeFacade[mode].newInstance());
             sort(out.data(),facade.comparator());
             } catch (Exception ee){ }
         return out;
@@ -295,7 +289,7 @@ public class FFTStatistic {
                out.data().add(new Extreme(data[i],i,diff,(data[i]-trend[i]),power,power2,decrem));
                }
         try {
-            ExtremeFacade facade=((ExtremeFacade) extremeFacade[mode].newInstance());
+            ExtremeFacade facade=((ExtremeFacade) Values.extremeFacade[mode].newInstance());
             sort(out.data(),facade.comparator());
             } catch (Exception ee){ }
         return out;

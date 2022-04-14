@@ -18,7 +18,7 @@ public class ExtremeList extends DAO {
         }
     private void createFacade(){
         try {
-            facade = (ExtremeFacade)FFTStatistic.extremeFacade[extremeMode].newInstance();
+            facade = (ExtremeFacade)Values.extremeFacade[extremeMode].newInstance();
             } catch (Exception e) {
                 facade = new ExtremeNull();
                 }
@@ -121,6 +121,7 @@ public class ExtremeList extends DAO {
         return testResult+" "+ testComment;
         }
     public ArrayList<Extreme> data(){ return data; }
+
     public String showExtrems(double firstFreq,double lastFreq, double  freqStep){
         createFacade();
         String out="";

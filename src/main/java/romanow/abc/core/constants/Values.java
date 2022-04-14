@@ -6,6 +6,7 @@ import romanow.abc.core.entity.base.WorkSettingsBase;
 import romanow.abc.core.entity.subjectarea.*;
 import romanow.abc.core.entity.users.User;
 import romanow.lep500.LEP500Params;
+import romanow.lep500.fft.*;
 
 import java.util.HashMap;
 
@@ -173,6 +174,24 @@ public class Values extends ValuesBase {
     public final static int ESWarning = 8;
     @CONST(group = "EState", title = "Аварийное")       // Аварийное
     public final static int ESFailure = 9;
+    //------------- Виды экстремумов------------------------------------------------------
+    @CONST(group = "EXMode", title = "Амплитуда")
+    public final static int ExtremeAbsMode=0;
+    @CONST(group = "EXMode", title = "Пик по спаду")
+    public final static int ExtremeDiffMode=1;
+    @CONST(group = "EXMode", title = "Пик по тренду")
+    public final static int ExtremeTrendMode=2;
+    @CONST(group = "EXMode", title = "Мощность пика к спаду")
+    public final static int ExtremePowerMode=3;
+    @CONST(group = "EXMode", title = "Мощность пика к тренду")
+    public final static int ExtremePower2Mode=4;
+    public static Class extremeFacade[] = new Class[]{
+            ExtremeAbs.class,
+            ExtremeDiff.class,
+            ExtremeTrend.class,
+            ExtremePower.class,
+            ExtremePower2.class
+            };
     //------------- Типы пользователей -----------------------------------------------------
     @CONST(group = "User", title = "Аналитик")
     public final static int UserLEP500Analytic = 3;
