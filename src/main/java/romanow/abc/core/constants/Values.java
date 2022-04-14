@@ -160,19 +160,19 @@ public class Values extends ValuesBase {
     @CONST(group = "EState", title = "Нестандартное")   // Аномальный случай
     public final static int ESAnomal = 2;
     @CONST(group = "EState", title = "Зашумлено")       // После фильтрации нет пиков
-    public final static int MENoise = 3;
+    public final static int ESNoise = 3;
     @CONST(group = "EState", title = "Слабый сигнал")   // Низкий уровень относительного мнимого
-    public final static int MELowLevel = 4;
+    public final static int ESLowLevel = 4;
     @CONST(group = "EState", title = "Идеальное")       // Идеальная форма спектра
-    public final static int MEIdeal = 5;
+    public final static int ESIdeal = 5;
     @CONST(group = "EState", title = "Норма")           // Соответствует норме
-    public final static int MENormal = 6;
+    public final static int ESNormal = 6;
     @CONST(group = "EState", title = "Удовлетворительное") // На границе нормы
-    public final static int MEValid = 7;
+    public final static int ESValid = 7;
     @CONST(group = "EState", title = "Предупреждение")  // На границе авариной
-    public final static int MEWarning = 8;
+    public final static int ESWarning = 8;
     @CONST(group = "EState", title = "Аварийное")       // Аварийное
-    public final static int MEFailure = 9;
+    public final static int ESFailure = 9;
     //------------- Типы пользователей -----------------------------------------------------
     @CONST(group = "User", title = "Аналитик")
     public final static int UserLEP500Analytic = 3;
