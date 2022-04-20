@@ -30,7 +30,7 @@ public class Values extends ValuesBase {
     // 1. Константы наследуются (аннотации)
     // 2. Массивы строк перекрываются
     // 3. статическая инициализация наследуется
-    private final static int LEP500ReleaseNumber=9;                  // номер сборки сервера
+    private final static int LEP500ReleaseNumber=10;                  // номер сборки сервера
     //----------- Данные ПЛК вне мета-системы -------------------------------------
     public final static String ESSStateIcon[]={"/ess_none.png","/ess_off.png","/ess_on.png"};
     //-----------------------------------------------------------------------------
@@ -89,7 +89,9 @@ public class Values extends ValuesBase {
         EntityFactory.put(new TableItem("Опора", Support.class).add("name"));
         EntityFactory.put(new TableItem("Линия", PowerLine.class).add("name"));
         EntityFactory.put(new TableItem("Параметры", LEP500Params.class));
+        EntityFactory.put(new TableItem("Выборка", MFSelection.class));
         HashMap<String,String> PrefixMap = getPrefixMap();
+        PrefixMap.put("MFSelection.createDate","c");
         PrefixMap.put("MeasureFile.importDate","i");
         PrefixMap.put("MeasureFile.measureDate","m");
         PrefixMap.put("MeasureFile.gps","g");

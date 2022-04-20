@@ -78,7 +78,7 @@ public class MeasureFile extends Entity {
         return ss.length()==0 ? "..." : ss;
     }
     public String toString(){
-        return def(powerLineName)+" / "+def(supportName)+" / "+def(sensor)+" ("+def(""+measureCounter)+")"+"\n"+measureDate.dateTimeToString();
+        return "["+getOid()+"] "+def(powerLineName)+" / "+def(supportName)+" / "+def(sensor)+" ("+def(""+measureCounter)+")"+" "+measureDate.dateTimeToString();
         }
     public EntityLink<Support> getSupport() {
         return Support; }

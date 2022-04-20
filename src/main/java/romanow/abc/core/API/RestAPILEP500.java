@@ -23,4 +23,7 @@ public interface RestAPILEP500 {
     /** Изменить экспертную оценку  */
     @POST("/api/lep500/measure/expertnote/set")
     Call<JEmpty> setExpertNote(@Header("SessionToken") String token, @Query("measureId") long id, @Query("note") int note);
+    @GET("/api/lep500/measure/select")
+    Call<ArrayList<MeasureFile>> getMeasureSelection(@Header("SessionToken") String token, @Query("note") int note,
+        @Query("userId") long usetId, @Query("line") String line, @Query("support") String support);
 }
