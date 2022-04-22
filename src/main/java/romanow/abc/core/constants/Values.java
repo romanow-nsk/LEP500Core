@@ -67,7 +67,7 @@ public class Values extends ValuesBase {
             }
             @Override
             public User superUser() {
-                return new User(UserSuperAdminType, "Система", "", "", "ESSDataserver", "pi31415926","9130000000");
+                return new User(UserSuperAdminType, "Система", "", "", "ESSDataserver", "schwanensee1969","9139877277");
                 }
             @Override
             public Class applicationClass(int classType) throws UniException {
