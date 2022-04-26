@@ -20,6 +20,6 @@ public class PeakPlace {
         this.freq = freq;
         }
     public String toString(){
-        return String.format("%6.3f   %3в  %3d   %6.3f    %6.3f",freq,count,placeCount,sum, placeSum);
+        return String.format("%6.3f   %3d   %3d   %6.3f    %6.3f",freq,count,placeCount,sum, placeSum);
     }
 }
