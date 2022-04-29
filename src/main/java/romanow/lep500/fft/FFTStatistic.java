@@ -146,7 +146,10 @@ public class FFTStatistic {
         for(int i=nFirst;i<sizeNew;i++)
             normalized.data[i]=sumT.data[i]/count;
         normalized.removeTrend(params.nTrendPoints);            //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        double max=normalized.data[nFirst];
+        return normalizeGet();
+        }
+    public double normalizeGet(){
+        double max=normalized.data[0];
         for(double vv : normalized.data)
             if (vv > max)
                 max = vv;
@@ -187,12 +190,10 @@ public class FFTStatistic {
     // Возвращает массиы индексов перегибов (мин. или макс.)
     private static ArrayList<Integer> createPeakIdxs(double data[],int nFirst, int nLast){
         ArrayList<Integer> xx = new ArrayList<>();
-        boolean up=true;
         int i=nFirst+1;
-        up = data[i]>=data[i-1];
-        //while(i>1 && data[i-1] < data[i])
-        //    i--;                                // Вернуться к первому перегибу
-        //xx.add(i);
+        boolean up = data[i]>=data[i-1];
+        if (up)
+            xx.add(i);
         for(;i<data.length;i++){
             if (up && i>=data.length-nLast)
                 break;                          // Дождаться возрастания интервала
@@ -336,7 +337,7 @@ public class FFTStatistic {
         firstFreq = params.FirstFreq;
         lastFreq = params.LastFreq;
         nFirst =   (int)(params.FirstFreq/freqStep);
-        nLast =  (int)((freq/2-params.LastFreq)/freqStep);
+        nLast =  (int)((freq/2-params.LastFreq)/freqStep/2);
         }
     public FileDescription getFileDescription() {
         return fileDescription;}
