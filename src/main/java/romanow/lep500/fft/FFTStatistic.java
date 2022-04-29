@@ -203,10 +203,8 @@ public class FFTStatistic {
             xx.add(i-1);
             up=!up;
             }
-        //while(xx.size()!=0 && xx.get(0)<nFirst){    // Удалить пики ниже границы
-        //    xx.remove(0);
-        //    xx.remove(0);
-        //    }
+        if (xx.size()%2==0)
+            xx.add(data.length-1);
         return xx;
         }
     //----------------------------------------------------------------------------------------------

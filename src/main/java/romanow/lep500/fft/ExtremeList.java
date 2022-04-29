@@ -28,9 +28,13 @@ public class ExtremeList extends DAO {
         createFacade();
         }
     public Pair<String,Integer> testAlarm2(LEP500Params set, double freqStep){
+        testComment = "Критерий: "+getFacade().getTitle()+"\n";
+        if (data.size()==0){
+            testComment+="Экстремумы отсутствуют\n";
+            return  new Pair<>(testComment,Values.MSUndefined);
+            }
         Extreme extreme = data.get(0);
         double f0 = extreme.idx*freqStep;
-        testComment = "Критерий: "+getFacade().getTitle()+"\n";
         testComment += String.format("Осн.част.=%5.2f гц "+(extreme.decSize==-1 ? "" : "D=%5.2f")+"\n",
                 extreme.idx*freqStep, Math.PI*extreme.decSize/extreme.idx);
         testComment+=String.format("Ампл.=%5.2f\n",extreme.value);
@@ -125,10 +129,10 @@ public class ExtremeList extends DAO {
     public String showExtrems(double firstFreq,double lastFreq, double  freqStep){
         createFacade();
         String out="";
-        out += String.format("Диапазон экстремумов: %6.3f-%6.3f\n",firstFreq,lastFreq);
         if (data().size()==0){
-            return "Экстремумов не найдено";
+            return "";
             }
+        out += String.format("Диапазон экстремумов: %6.3f-%6.3f\n",firstFreq,lastFreq);
         int count = data().size();
         ExtremeFacade facade = getFacade();
         facade.setExtreme(data().get(0));
