@@ -26,6 +26,10 @@ public class FFTStatistic {
     private boolean valid=true;
     private String message="";
     private double freqStep=0;
+    private double firstFreq=0;
+    private double lastFreq=0;
+    private int nFirst=0;
+    private int nLast=0;
     private double freq=0;
     private String name="";
     private int count=0;
@@ -35,8 +39,6 @@ public class FFTStatistic {
     private FFTArray wave=null;             // Оригинальная волна
     private SmoothArray sumT=null;          // Сумма по времени
     private SmoothArray sum2T=null;         // Сумма квадратов по времени
-    private SmoothArray sum2DiffF=null;     // Корреляция по частоте
-    private SmoothArray sum2DiffT=null;     // Корреляция по времени
     private SmoothArray normalized = null;
     private FileDescription fileDescription = new FileDescription("");
     public void reset() {
@@ -51,8 +53,6 @@ public class FFTStatistic {
         size = data.length;
         sumT=new SmoothArray(size);
         sum2T=new SmoothArray(size);
-        sum2DiffF=new SmoothArray(size);
-        sum2DiffT=new SmoothArray(size);
         }
 
     public FFTArray getSumT(){
@@ -64,8 +64,6 @@ public class FFTStatistic {
     public void smooth(int steps){
         sumT.smooth(steps);
         sum2T.smooth(steps);
-        sum2DiffF.smooth(steps);
-        sum2DiffT.smooth(steps);
         }
     public FFTStatistic(String name){
         setObjectName(name);
@@ -83,18 +81,11 @@ public class FFTStatistic {
         for(int i=0;i<size;i++){
             sumT.data[i]+=data[i];
             sum2T.data[i]+=data[i]*data[i];
-            if (prev!=null)
-                sum2DiffT.data[i]+=(data[i]-prev[i])*(data[i]-prev[i]);
-            if (i!=0 && i!=size-1){
-                sum2DiffF.data[i]+=(data[i]-data[i-1])*(data[i]-data[i-1]);
-                }
             }
         prev = data;
         count++;
         sumT.incCount();
         sum2T.incCount();
-        sum2DiffF.incCount();
-        sum2DiffT.incCount();
         }
     public int getCount(){
         return count;
@@ -130,6 +121,8 @@ public class FFTStatistic {
             }
         return out;
         }
+    //------------------- deprecated ------------------------------
+    /*
     public double normalizeStart(int nPount){
         if (count==0) return 0;
         normalized = new SmoothArray(size);
@@ -137,6 +130,23 @@ public class FFTStatistic {
             normalized.data[i]=sumT.data[i]/count;
         normalized.removeTrend(nPount);            //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         double max=normalized.data[0];
+        for(double vv : normalized.data)
+            if (vv > max)
+                max = vv;
+        return max;
+        }
+     */
+    public double normalizeStart(LEP500Params params){
+        noFirstLastPoints(params);
+        if (count==0) return 0;
+        int sizeNew = size-nLast+1;
+        normalized = new SmoothArray(sizeNew);
+        for(int i=0;i<normalized.data.length;i++)
+            normalized.data[i]=0;
+        for(int i=nFirst;i<sizeNew;i++)
+            normalized.data[i]=sumT.data[i]/count;
+        normalized.removeTrend(params.nTrendPoints);            //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        double max=normalized.data[nFirst];
         for(double vv : normalized.data)
             if (vv > max)
                 max = vv;
@@ -160,18 +170,6 @@ public class FFTStatistic {
     public double[] getDisps(){
         return getDisps(sum2T.data);
         }
-    public double[] getDiffsF(){
-        return getDisps(sum2DiffF.data);
-        }
-    public double getDiffF(){
-        return getMid(getDiffsF());
-        }
-    public double[] getDiffsT(){
-        return getDisps(sum2DiffT.data);
-        }
-    public double getDiffT(){
-        return getMid(getDiffsT());
-        }
     public double[] getNormalized() { return normalized.data; }
     public double getFreq() { return freq; }
     public void setFreq(double freq) { this.freq = freq; }
@@ -191,9 +189,10 @@ public class FFTStatistic {
         ArrayList<Integer> xx = new ArrayList<>();
         boolean up=true;
         int i=nFirst+1;
-        while(i>1 && data[i-1] < data[i])
-            i--;                                // Вернуться к первому перегибу
-        xx.add(i);
+        up = data[i]>=data[i-1];
+        //while(i>1 && data[i-1] < data[i])
+        //    i--;                                // Вернуться к первому перегибу
+        //xx.add(i);
         for(;i<data.length;i++){
             if (up && i>=data.length-nLast)
                 break;                          // Дождаться возрастания интервала
@@ -204,6 +203,10 @@ public class FFTStatistic {
             xx.add(i-1);
             up=!up;
             }
+        //while(xx.size()!=0 && xx.get(0)<nFirst){    // Удалить пики ниже границы
+        //    xx.remove(0);
+        //    xx.remove(0);
+        //    }
         return xx;
         }
     //----------------------------------------------------------------------------------------------
@@ -254,12 +257,10 @@ public class FFTStatistic {
         }
     //----------------------------------------------------------------------------------------------
     public ExtremeList createExtrems(int mode, LEP500Params set) {
-        return createExtrems(mode,noFirstPoints(set),noLastPoints(set),set.nTrendPoints);
-        }
-    public ExtremeList createExtrems(int mode, int nFirst, int nLast, int trendPointsNum){
+        noFirstLastPoints(set);
         double data[] = normalized.getOriginal();
         ExtremeList out = new ExtremeList(mode);
-        double trend[] = LEP500Utils.calcTrend(data,trendPointsNum);
+        double trend[] = LEP500Utils.calcTrend(data,set.nTrendPoints);
         ArrayList<Integer> peaksIdx = createPeakIdxs(data,nFirst,nLast);
         for(int idx=1;idx<peaksIdx.size();idx+=2){
             int k1,k2,k3,k4,k5,k6;
@@ -333,14 +334,22 @@ public class FFTStatistic {
         return valid; }
     public void setValid(boolean valid) {
         this.valid = valid; }
-    public int noFirstPoints(LEP500Params params){
-        return  (int)(params.FirstFreq/freqStep);
-        }
-    public int noLastPoints(LEP500Params params){
-        return (int)((freq/2-params.LastFreq)/freqStep);
+    public void noFirstLastPoints(LEP500Params params){
+        firstFreq = params.FirstFreq;
+        lastFreq = params.LastFreq;
+        nFirst =   (int)(params.FirstFreq/freqStep);
+        nLast =  (int)((freq/2-params.LastFreq)/freqStep);
         }
     public FileDescription getFileDescription() {
         return fileDescription;}
     public void setFileDescription(FileDescription fileDescription) {
         this.fileDescription = fileDescription; }
+    public double getFirstFreq() {
+        return firstFreq;}
+    public double getLastFreq() {
+        return lastFreq;}
+    public int getnFirst() {
+        return nFirst;}
+    public int getnLast() {
+        return nLast; }
 }

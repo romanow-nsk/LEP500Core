@@ -11,34 +11,40 @@ public class AnalyseResult extends DAO implements I_TrendData{
     public final ArrayList<ExtremeList> data = new ArrayList<ExtremeList>();
     private String title="";
     public final double firstFreq,lastFreq,dFreq;
+    public final int nFirst,nLast;
     public final double spectrum[];
     public final String message;
     public final boolean valid;
     public final MeasureFile measure;
-    public AnalyseResult(FFTStatistic statistic,MeasureFile measureFile,double firstFreq0, double lastFreq0) {
+    public AnalyseResult(FFTStatistic statistic,MeasureFile measureFile) {
+        measure = measureFile;
         this.dFreq = statistic.getFreqStep();
         this.spectrum = statistic.getNormalized();
         this.message = statistic.getMessage();
         this.valid = statistic.isValid();
-        measure = measureFile;
-        firstFreq = firstFreq0;
-        lastFreq = lastFreq0;
+        firstFreq = statistic.getFirstFreq();
+        lastFreq = statistic.getLastFreq();
+        nFirst = statistic.getnFirst();
+        nLast = statistic.getnLast();
         }
     @Override
     public double[] getY() {
-        return spectrum.clone();
+        double yy[] = new double[spectrum.length-nFirst];
+        for(int i=0;i<yy.length;i++)
+            yy[i]=spectrum[i+nFirst];
+        return yy;
         }
     @Override
     public double[] getX() {
-        double xx[] = new double[spectrum.length];
-        double x=0;
-        for(int i=0;i<spectrum.length;i++,x+=dFreq)
+        double xx[] = new double[spectrum.length-nFirst];
+        double x=nFirst*dFreq;
+        for(int i=0;i<xx.length;i++,x+=dFreq)
             xx[i]=x;
         return xx;
         }
     @Override
     public double getX0() {
-        return 0;
+        return nFirst*dFreq;
         }
     @Override
     public double getDX() {
