@@ -237,8 +237,8 @@ public class FFTStatistic {
                     power2 +=  data[j]-trend[j];
                     }
                 */
-                for(k3=i;k3>=0 && data[k3]>data[i]/2;k3--);
-                for(k4=i;k4<data.length && data[k4]>data[i]/2;k4++);
+                for(k3=i;k3>=0 && data[k3]*data[k3]>data[i]*data[i]/2;k3--);
+                for(k4=i;k4<data.length && data[k4]*data[k4]>data[i]*data[i]/2;k4++);
                 double d1 = data[i]-data[k1];
                 double d2 = data[i]-data[k2];
                 double diff = Math.sqrt((d1*d1+d2*d2)/2);
@@ -277,8 +277,8 @@ public class FFTStatistic {
                power +=  data[j]-vmin;
                power2 +=  data[j]-trend[j];
                }
-           for(k3=i;k3>=0 && data[k3]>data[i]/2;k3--);
-           for(k4=i;k4<data.length && data[k4]>data[i]/2;k4++);
+           for(k3=i;k3>=0 && data[k3]*data[k3]>data[i]*data[i]/2;k3--);
+           for(k4=i;k4<data.length && data[k4]*data[k4]>data[i]*data[i]/2;k4++);
            double d1 = data[i]-data[k1];
            double d2 = data[i]-data[k2];
            double diff = Math.sqrt((d1*d1+d2*d2)/2);

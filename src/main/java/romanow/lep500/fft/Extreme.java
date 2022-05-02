@@ -7,7 +7,7 @@ public class Extreme {
     public final double power;
     public final double power2;
     public final int idx;
-    public final int decSize;
+    public final int decSize;           // Интервал декремента в индексах частоты
     public Extreme(double value, int idx,double diff,double trend,double power, double power2,int decSize) {
         this.value = value;
         this.diff = diff;
