@@ -7,6 +7,7 @@ package romanow.lep500;
 
 
 import java.io.*;
+import java.util.ArrayList;
 
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
@@ -209,7 +210,7 @@ public class FFTAudioTextFile implements FFTFileSource {
                 }
             return true;
         }
-    private void writeWave(String outname,double freq, I_Notify back) throws Exception{
+    public void writeWave(String outname,double freq, I_Notify back) throws Exception{
             removeTrend(nPoints);
             FileOutputStream wav_file = new FileOutputStream(outname);
         	int sample_rate;
@@ -364,9 +365,9 @@ public class FFTAudioTextFile implements FFTFileSource {
         for(int i=0;i<data.length;i++){
             data[i]=(short) (v0/5+1000*Math.sin(i*2*Math.PI/25.)+500*Math.sin(i*2*Math.PI/10.));
             v0++;
+            }
         }
-    }
-    public void save(String path, I_EventListener back){
+    public void save(String path,I_EventListener back){
         FileOutputStream out=null;
         String fspec = path+"/"+createOriginalFileName();
         try {
@@ -409,6 +410,63 @@ public class FFTAudioTextFile implements FFTFileSource {
                 os.write(""+data[i]);
                 os.newLine();
             }
+            os.flush();
+            os.close();
+            out.close();
+        } catch (Exception e) {
+            back.onEvent("Ошибка записи в файл "+fspec+": "+e.toString());
+            if (out!=null) {
+                try {
+                    out.close();
+                } catch (IOException ex) {}
+            }
+        }
+    }
+    public void save(String path,FileDescription fd, I_EventListener back){
+        FileOutputStream out=null;
+        String fspec = fd.createOriginelFileName();
+        if (path!=null && path.length()!=0)
+            fspec = path+"/"+fspec;
+        try {
+            out = new FileOutputStream(fspec);
+            BufferedWriter os = new BufferedWriter(new OutputStreamWriter(out,"Windows-1251"));
+            //0 16 октября 2020г. 16:53:01
+            DateTimeFormatter dtf = DateTimeFormat.forPattern("dd-MM-yyyy HH:mm:ss");
+            os.write(dtf.print(fd.getCreateDate().timeInMS()));
+            os.newLine();
+            //1 CM-316 ужур сора 1 цепь опора 352
+            os.write(fd.getPowerLine()+"_"+fd.getSupport());
+            os.newLine();
+            //2 -------
+            os.write(fd.getGps().toStrY());
+            os.newLine();
+            //3 -------
+            os.write(fd.getGps().toStrX());
+            os.newLine();
+            //4 0
+            os.write(""+fd.getGps().state());
+            os.newLine();
+            //5 16 бит  тдм 003
+            os.write("16 бит");
+            os.newLine();
+            //6 1
+            os.write(""+fd.getExpertNote());
+            os.newLine();
+            //7
+            os.write(""+fd.getMeasureCounter());
+            os.newLine();
+            //8 10000
+            os.write(""+(int)(fd.getFileFreq()*100));
+            os.newLine();
+            //9 канал-1 баланс=128 температура=8C
+            os.write(SensorPrefix+sensorName);
+            os.newLine();
+            os.write(""+data.length);
+            os.newLine();
+            for(int i=0;i<data.length;i++) {
+                os.write(""+data[i]);
+                os.newLine();
+                }
             os.flush();
             os.close();
             out.close();
