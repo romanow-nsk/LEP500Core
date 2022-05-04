@@ -48,7 +48,8 @@ public class SqeezyWaveData {
         maxStartIdx = new ArrayList<>();
         for(int i=1;i<maxIdx.size();i++){
             int idx = maxIdx.get(i);
-            if (data[idx]/data[maxIdx.get(i-1)] >startDiff && data[idx]>maxFull*startLevel){
+            if (data[idx]/data[maxIdx.get(i-1)] >startDiff &&  data[idx]>maxFull*startLevel){
+                System.out.println(data[idx]+" "+data[maxIdx.get(i-1)]+" "+data[maxIdx.get(i-2)]);
                 maxStartIdx.add(i);
                 System.out.println("overIdx="+idx+" "+(int)data[idx]);
                 }
@@ -67,14 +68,14 @@ public class SqeezyWaveData {
         return out;
         }
     public static void main(String ss[]) throws Exception {
-        String test1="20220426T092725_45-1_СМ-300_Опора 125";
+        String test1="20220504T113411_112-2_сокур рука_Опора 85";
         BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(test1+".txt"),"Windows-1251"));
         FFTAudioTextFile file = new FFTAudioTextFile();
         FileDescription description = new FileDescription("");
         file.readData(description,reader,true);
         double dd[] = file.getData();
         SqeezyWaveData sqeezyData = new SqeezyWaveData();
-        double out[] = sqeezyData.squeezy(dd,10, 0.6,10);
+        double out[] = sqeezyData.squeezy(dd,3, 0.7,10);
         file.setData(out);
         file.writeWave("out.wav", 441, new I_Notify() {
             @Override
@@ -87,7 +88,7 @@ public class SqeezyWaveData {
                 }
             });
         description.setSupport(description.getSupport()+"++");
-        file.save("",description,new I_EventListener() {
+        file.save(false,"",description,new I_EventListener() {
             @Override
             public void onEvent(String ss) {
                 System.out.println(ss);
