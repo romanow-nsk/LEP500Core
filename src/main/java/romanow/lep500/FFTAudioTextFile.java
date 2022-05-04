@@ -479,4 +479,67 @@ public class FFTAudioTextFile implements FFTFileSource {
             }
         }
     }
+    //------------------------------ Удаление БОМ-БОМ ------------------------------------------------------------------
+    public void squeezy(double startDiff, double startLevel, int skipPeaks){
+        double sqData[] = new double[data.length];
+        int sqIdx=0;
+        ArrayList<Integer> maxIdx = new ArrayList<>();          // Огибающая из максимумов
+        for(int i=1; i<data.length-1;i++)
+            if (data[i]>0 && data[i] > data[i-1] && data[i] > data[i+1])
+                maxIdx.add(i);
+        if (maxIdx.size()==0)
+            return;
+        double maxFull = data[maxIdx.get(0)];
+        for(Integer idx : maxIdx)
+            if (data[idx.intValue()]>maxFull)
+                maxFull = data[idx.intValue()];
+        ArrayList<Integer> maxStartIdx = new ArrayList<>();
+        for(int i=1;i<maxIdx.size();i++){
+            int idx = maxIdx.get(i);
+            if (data[idx]/data[maxIdx.get(i-1)] >startDiff && data[idx]>maxFull*startLevel){
+                maxStartIdx.add(i);
+                System.out.println("overIdx="+idx+" "+(int)data[idx]);
+            }
+        }
+        maxStartIdx.add(maxIdx.size()-1);                               // Добавить последний
+        for (int i=0;i<maxStartIdx.size()-1;i++){
+            int firstIdx = maxIdx.get(maxStartIdx.get(i)+skipPeaks);    // Первый пик интервала и пропустить
+            int lastIdx = maxIdx.get(maxStartIdx.get(i+1)-1);           // Предпоследний пик перед следующим ударом
+            for(int j=firstIdx; j<lastIdx;j++)             // Скопировать
+                sqData[sqIdx++]=data[j];
+            //------------------ TODO - copyData before Noise -------------------------
+            }
+        double out[] = new double[sqIdx];
+        for(int i=0;i<out.length;i++)
+            out[i]=sqData[i];
+        data = out;
+        sz = data.length;
+        }
+    //------------------------------------------------------------------------------------------------------------------
+    public static void main(String ss[]) throws Exception {
+        //String test1="20220426T092725_45-1_СМ-300_Опора 125";
+        String test1="20220504T113411_112-2_сокур рука_Опора 85";
+        BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(test1+".txt"),"Windows-1251"));
+        FFTAudioTextFile file = new FFTAudioTextFile();
+        FileDescription description = new FileDescription("");
+        file.readData(description,reader,true);
+        file.squeezy(3, 0.7,10);
+        file.writeWave("out.wav", 441, new I_Notify() {
+            @Override
+            public void onMessage(String mes) {
+                System.out.println(mes);
+            }
+            @Override
+            public void onError(Exception ee) {
+                System.out.println(ee.toString());
+            }
+            });
+        description.setSupport(description.getSupport()+"++");
+        file.save("",description,new I_EventListener() {
+            @Override
+            public void onEvent(String ss) {
+                System.out.println(ss);
+            }
+            });
+    }
 }

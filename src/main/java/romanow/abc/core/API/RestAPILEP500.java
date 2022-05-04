@@ -26,4 +26,8 @@ public interface RestAPILEP500 {
     @GET("/api/lep500/measure/select")
     Call<ArrayList<MeasureFile>> getMeasureSelection(@Header("SessionToken") String token, @Query("note") int note,
         @Query("userId") long usetId, @Query("line") String line, @Query("support") String support);
+    /** Анализ группы измерений */
+    @POST("/api/lep500/analyse/shake")
+    Call<ArrayList<AnalyseResult>> analyseShake(@Header("SessionToken") String token, @Query("paramId") long paramId,
+        @Query("startDiff") double startDiff, @Query("startLevel") double startLevel, @Query("skipPeaks") double skipPeaks, @Body OidList body);
 }
