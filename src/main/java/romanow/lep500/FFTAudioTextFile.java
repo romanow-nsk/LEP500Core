@@ -368,8 +368,11 @@ public class FFTAudioTextFile implements FFTFileSource {
             }
         }
     public void save(String path,I_EventListener back){
+        save(false,path,back);
+        }
+    public void save(boolean fullPath,String path,I_EventListener back){
         FileOutputStream out=null;
-        String fspec = path+"/"+createOriginalFileName();
+        String fspec = path + (fullPath ? "" : ("/"+createOriginalFileName()));
         try {
             out = new FileOutputStream(fspec);
             BufferedWriter os = new BufferedWriter(new OutputStreamWriter(out,"Windows-1251"));
@@ -423,10 +426,13 @@ public class FFTAudioTextFile implements FFTFileSource {
         }
     }
     public void save(String path,FileDescription fd, I_EventListener back){
+        save(false,path,fd,back);
+        }
+    public void save(boolean full, String path,FileDescription fd, I_EventListener back){
         FileOutputStream out=null;
         String fspec = fd.createOriginelFileName();
         if (path!=null && path.length()!=0)
-            fspec = path+"/"+fspec;
+            fspec = path+(full ? "" : "/"+fspec);
         try {
             out = new FileOutputStream(fspec);
             BufferedWriter os = new BufferedWriter(new OutputStreamWriter(out,"Windows-1251"));
@@ -517,13 +523,13 @@ public class FFTAudioTextFile implements FFTFileSource {
         }
     //------------------------------------------------------------------------------------------------------------------
     public static void main(String ss[]) throws Exception {
-        //String test1="20220426T092725_45-1_СМ-300_Опора 125";
-        String test1="20220504T113411_112-2_сокур рука_Опора 85";
+        String test1="20220426T092725_45-1_СМ-300_Опора 125";
+        //String test1="20220504T113411_112-2_сокур рука_Опора 85";
         BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(test1+".txt"),"Windows-1251"));
         FFTAudioTextFile file = new FFTAudioTextFile();
         FileDescription description = new FileDescription("");
         file.readData(description,reader,true);
-        file.squeezy(3, 0.7,10);
+        file.squeezy(3, 0.7,5);
         file.writeWave("out.wav", 441, new I_Notify() {
             @Override
             public void onMessage(String mes) {

@@ -53,10 +53,13 @@ public class FileDescription {
             }
         return ss.length()==0 ? "" : "Формат: "+ss;
         }
-    public String createOriginelFileName(){
+    public String createOriginelFileNameNoExt(){
         DateTimeFormatter formatter = DateTimeFormat.forPattern("yyyyMMdd'T'HHmmss");
-        String ss = formatter.print(createDate.timeInMS())+"_"+measureCounter+"-"+sensor+"_"+powerLine+"_"+support+".txt";
+        String ss = formatter.print(createDate.timeInMS())+"_"+measureCounter+"-"+sensor+"_"+powerLine+"_"+support;
         return ss;
+        }
+    public String createOriginelFileName(){
+        return createOriginelFileNameNoExt()+".txt";
         }
     public void parseFromName() {
         formatError="";
