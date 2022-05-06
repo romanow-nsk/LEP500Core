@@ -65,7 +65,7 @@ public class AnalyseResultList {
                         peak = new PeakPlace(extreme.idx * result.dFreq);
                         placeMap.put(extreme.idx,peak);
                         }
-                    peak.addValue(facade.getValue(), list.data().size() - j);
+                    peak.addValue(facade.getValue(), list.data().size() - j,extreme.decSize*result.dFreq);
                     }
                 }
             }

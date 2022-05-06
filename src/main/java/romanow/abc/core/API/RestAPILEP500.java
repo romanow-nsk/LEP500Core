@@ -21,8 +21,9 @@ public interface RestAPILEP500 {
     @POST("/api/lep500/analyse")
     Call<ArrayList<AnalyseResult>> analyse(@Header("SessionToken") String token, @Query("paramId") long paramId, @Body OidList body);
     /** Удалить БОМ-БОМ */
-    @POST("/api/lep500/noshake")
-    Call<MeasureFile> removeShake(@Header("SessionToken") String token, @Query("measureId") long measureId, @Query("startDiff") double startDiff, @Query("startLevel") double startLevel, @Query("skipPeaks") int skipPeaks);
+    @POST("/api/lep500/measure/split")
+    Call <MFSelection> splitMeasure(@Header("SessionToken") String token, @Query("measureId") long measureId, @Query("size32768") boolean size32768,
+            @Query("startOver") int startOver, @Query("startLevelProc") int startLevelProc, @Query("skipTimeMS") int skipTimeMS);
     /** Изменить экспертную оценку  */
     @POST("/api/lep500/measure/expertnote/set")
     Call<JEmpty> setExpertNote(@Header("SessionToken") String token, @Query("measureId") long id, @Query("note") int note);
