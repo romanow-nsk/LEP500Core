@@ -522,6 +522,53 @@ public class FFTAudioTextFile implements FFTFileSource {
         sz = data.length;
         }
     //------------------------------------------------------------------------------------------------------------------
+    public ArrayList<FFTAudioTextFile> splitMeasure(boolean size32768, int startOver, int startLevelProc, int skipTimeMS, double fileFreq){
+        int skipCount = (int)fileFreq*skipTimeMS/1000;
+        ArrayList<FFTAudioTextFile> out = new ArrayList<>();
+        ArrayList<Integer> maxIdx = new ArrayList<>();          // Огибающая из максимумов
+        for(int i=1; i<data.length-1;i++)
+            if (data[i]>0 && data[i] > data[i-1] && data[i] > data[i+1])
+                maxIdx.add(i);
+        if (maxIdx.size()==0)
+            return out;
+        double maxFull = data[maxIdx.get(0)];
+        for(Integer idx : maxIdx)
+            if (data[idx.intValue()]>maxFull)
+                maxFull = data[idx.intValue()];
+        ArrayList<Integer> maxStartIdx = new ArrayList<>();
+        for(int i=1;i<maxIdx.size();i++){
+            int idx = maxIdx.get(i);
+            if (data[idx]/data[maxIdx.get(i-1)] >=startOver && data[idx]>maxFull*startLevelProc/100){
+                maxStartIdx.add(i);
+                System.out.println("overIdx="+idx+" "+(int)data[idx]);
+                }
+            }
+        if (maxStartIdx.size()==0)
+            return out;
+        maxStartIdx.add(maxIdx.size()-1);                               // Добавить последний
+        for (int i=0;i<maxStartIdx.size()-1;i++){
+            int firstIdx = maxIdx.get(maxStartIdx.get(i))+skipCount;    // Первый пик интервала и пропустить
+            int lastIdx = maxIdx.get(maxStartIdx.get(i+1)-skipCount);   // Предпоследний пик перед следующим ударом
+            if (firstIdx>=lastIdx)
+                continue;
+            int srcSize=lastIdx-firstIdx+1;
+            int finSize = size32768 ? 32768 : 1024;
+            if (!size32768)
+                while(finSize<srcSize)
+                    finSize*=2;
+            double dd[] = new double[finSize];
+            for(int j=0;j<finSize;j++)
+                dd[j]=0;
+            for(int j=firstIdx; j<=lastIdx;j++)
+                dd[j-firstIdx]=data[j];
+            FFTAudioTextFile ff = new FFTAudioTextFile();
+            ff.setData(dd);
+            ff.sz = dd.length;
+            out.add(ff);
+            }
+        return out;
+        }
+    //------------------------------------------------------------------------------------------------------------------
     public static void main(String ss[]) throws Exception {
         String test1="20220426T092725_45-1_СМ-300_Опора 125";
         //String test1="20220504T113411_112-2_сокур рука_Опора 85";
@@ -529,6 +576,32 @@ public class FFTAudioTextFile implements FFTFileSource {
         FFTAudioTextFile file = new FFTAudioTextFile();
         FileDescription description = new FileDescription("");
         file.readData(description,reader,true);
+        ArrayList<FFTAudioTextFile> list = file.splitMeasure(false,3,60,50, description.getFileFreq());
+        if (list.size()==0){
+            System.out.println("Отсутствуют (короткие) интервалы возбуждения");
+            return;
+            }
+        for(int i=0;i<list.size();i++){
+            FFTAudioTextFile file2 = list.get(i);
+            file2.writeWave("out-"+(i+1)+".wav", 441, new I_Notify() {
+                @Override
+                public void onMessage(String mes) {
+                    System.out.println(mes);
+                    }
+                @Override
+                public void onError(Exception ee) {
+                    System.out.println(ee.toString());
+                    }
+                });
+            description.setMeasureCounter(i+1);
+            file2.save("",description,new I_EventListener() {
+                @Override
+                public void onEvent(String ss) {
+                    System.out.println(ss);
+                    }
+                });
+            }
+        /*
         file.squeezy(3, 0.7,5);
         file.writeWave("out.wav", 441, new I_Notify() {
             @Override
@@ -547,5 +620,6 @@ public class FFTAudioTextFile implements FFTFileSource {
                 System.out.println(ss);
             }
             });
+         */
     }
 }

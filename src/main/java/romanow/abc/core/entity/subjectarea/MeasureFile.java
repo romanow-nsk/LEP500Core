@@ -115,4 +115,6 @@ public class MeasureFile extends Entity {
     public void setSupportName(String supportName) {
         this.supportName = supportName;
     }
+    public void setMeasureCounter(int measureCounter) {
+        this.measureCounter = measureCounter; }
 }
