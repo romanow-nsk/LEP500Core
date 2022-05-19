@@ -44,6 +44,17 @@ public class FFT {
             }
         return val;
         }
+    public void makeAutoCorrelation(){
+        double out[] = new double[fullWave.length];
+        for(int offset=0;offset<out.length;offset++){
+            double sum=0;
+            int cnt=0;
+            for(int j=0;j+offset<out.length;j++,cnt++)
+                sum+=fullWave[j]*fullWave[j+offset];
+            out[offset]=cnt==0 ? 0 : sum/cnt;
+            }
+        fullWave = out;
+    }
     //--------------------------------------------------------------------------
     private TimeCounter tc =
             new TimeCounter(new String[]{"Чтение","БПФ","Компрессия","Общее"});
@@ -84,6 +95,8 @@ public class FFT {
         fullWave = new double[size];
         try {
             audioInputStream.read(fullWave, 0, size);
+            if (pars.autoCorrelate())
+                makeAutoCorrelation();
            } catch(IOException ee){
                 back.onError(ee);
                 return false;

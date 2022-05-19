@@ -31,6 +31,7 @@ public class LEP500Params extends NamedEntity {
     public double K5=0.2;                       // Снижение влияния с разницей частот
     public double K6=3;                         // Уровень заленого
     public double K7=1.5;                       // Уровень желтого
+    public boolean autoCorrelation=false;       // Автокорреляция
     public String getTitle(){
         return paramListName;
     }
