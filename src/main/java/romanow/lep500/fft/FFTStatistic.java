@@ -156,6 +156,7 @@ public class FFTStatistic {
         return max;
         }
     public void normalizeFinish(double max){
+        if (max==0) return;
         for(int i=0;i<normalized.data.length;i++)
             normalized.data[i]/=max;
         }
