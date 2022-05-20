@@ -53,6 +53,7 @@ public class FFTStatistic {
         size = data.length;
         sumT=new SmoothArray(size);
         sum2T=new SmoothArray(size);
+        normalized = new SmoothArray(size);
         }
 
     public FFTArray getSumT(){
