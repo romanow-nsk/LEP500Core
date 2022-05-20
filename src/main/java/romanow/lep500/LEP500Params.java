@@ -32,6 +32,7 @@ public class LEP500Params extends NamedEntity {
     public double K6=3;                         // Уровень зеленого
     public double K7=1.5;                       // Уровень желтого
     public int autoCorrelation=0;               // Автокорреляция
+    public boolean groupNormalize=true;         // Групповая нормализация
     public String getTitle(){
         return paramListName;
     }

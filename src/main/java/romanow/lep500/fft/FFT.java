@@ -52,7 +52,9 @@ public class FFT {
             int cnt=0;
             for(int j=0;j<sz;j++,cnt++){
                 if (j+offset>=sz)
-                    vv=fullWave[(j+offset)%sz];       // Копирование исходного сигнала
+                    vv=fullWave[(j+offset)%sz];
+                    //vv=fullWave[j+offset-sz+sz%offset];
+                    // Привязка в периоду offset - отнять sz и добавить остаток кратности размера буфера к периоду
                 else
                     vv=fullWave[j+offset];
                 sum+=fullWave[j]*vv;

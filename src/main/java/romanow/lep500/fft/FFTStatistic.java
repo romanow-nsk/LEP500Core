@@ -338,7 +338,7 @@ public class FFTStatistic {
         firstFreq = params.FirstFreq;
         lastFreq = params.LastFreq;
         nFirst =   (int)(params.FirstFreq/freqStep);
-        nLast =  (int)((freq/2-params.LastFreq)/freqStep/2);
+        nLast =  (int)((freq/2-params.LastFreq)/freqStep);
         }
     public FileDescription getFileDescription() {
         return fileDescription;}
