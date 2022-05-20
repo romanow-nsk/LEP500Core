@@ -196,7 +196,7 @@ public class FFTStatistic {
         if (up)
             xx.add(i);
         for(;i<data.length;i++){
-            if (up && i>=data.length-nLast)
+            if (up && i>=data.length)
                 break;                          // Дождаться возрастания интервала
             if (up && data[i-1] < data[i])
                 continue;
