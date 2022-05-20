@@ -29,7 +29,7 @@ public class LEP500Params extends NamedEntity {
     public double K3=0.7;                       // Уровень второстепенного пика к основному
     public double K4=0.2;                       // Относительная частота второстепенного пика
     public double K5=0.2;                       // Снижение влияния с разницей частот
-    public double K6=3;                         // Уровень заленого
+    public double K6=3;                         // Уровень зеленого
     public double K7=1.5;                       // Уровень желтого
     public int autoCorrelation=0;               // Автокорреляция
     public String getTitle(){

@@ -46,11 +46,20 @@ public class FFT {
         }
     public void makeAutoCorrelation(){
         double out[] = new double[fullWave.length];
-        for(int offset=0;offset<out.length;offset++){
-            double sum=0;
+        int sz = out.length;
+        for(int offset=0;offset<sz;offset++){
+            double sum=0,vv;
             int cnt=0;
-            for(int j=0;j+offset<out.length;j++,cnt++)
-                sum+=fullWave[j]*fullWave[j+offset];
+            for(int j=0;j<sz;j++,cnt++){
+                if (j+offset>=sz)
+                    vv=fullWave[(j+offset)%sz];       // Копирование исходного сигнала
+                else
+                    vv=fullWave[j+offset];
+                sum+=fullWave[j]*vv;
+                }
+            //double ww = sum/cnt;
+            //boolean sigh = ww<0;
+            //out[offset]=cnt==0 ? 0 : Math.sqrt(sigh ? -ww : ww);
             out[offset]=cnt==0 ? 0 : sum/cnt;
             }
         fullWave = out;
