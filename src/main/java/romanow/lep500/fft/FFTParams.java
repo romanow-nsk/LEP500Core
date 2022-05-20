@@ -19,7 +19,7 @@ public class FFTParams {
     private double compressGrade=0;         // Степень компрессии
     private boolean compressMode=false;
     private double kAmpl=1;                 // Ампл. компрессии
-    private boolean autoCorrelate=false;
+    private int autoCorrelate=0;
     public FFTParams procOver(int procOver0){
         procOver = procOver0;
         return this;
@@ -28,7 +28,7 @@ public class FFTParams {
         W = W0;
         return this;
         }
-    public FFTParams autoCorrelate(boolean auto){
+    public FFTParams autoCorrelate(int auto){
         autoCorrelate = auto;
         return this;
     }
@@ -79,7 +79,7 @@ public class FFTParams {
         return W; }
     public int procOver() {
         return procOver; }
-    public boolean autoCorrelate(){
+    public int autoCorrelate(){
         return autoCorrelate;
         }
     }

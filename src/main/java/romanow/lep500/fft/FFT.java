@@ -95,7 +95,7 @@ public class FFT {
         fullWave = new double[size];
         try {
             audioInputStream.read(fullWave, 0, size);
-            if (pars.autoCorrelate())
+            for(int i=pars.autoCorrelate();i>0;i--)
                 makeAutoCorrelation();
            } catch(IOException ee){
                 back.onError(ee);
