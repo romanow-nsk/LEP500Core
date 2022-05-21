@@ -100,6 +100,68 @@
             <artifactId>retrofit</artifactId>
             <version>2.5.0</version>
         </dependency>
+        <!-- https://jarcasting.com/artifacts/org.nd4j/nd4j-native-platform/ -->
+        <dependency>
+            <groupId>org.nd4j</groupId>
+            <artifactId>nd4j-native-platform</artifactId>
+            <version>1.0.0-M2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.deeplearning4j</groupId>
+            <artifactId>deeplearning4j-nn</artifactId>
+            <version>1.0.0-M2</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.deeplearning4j/deeplearning4j-core -->
+        <dependency>
+            <groupId>org.deeplearning4j</groupId>
+            <artifactId>deeplearning4j-core</artifactId>
+            <version>1.0.0-M2</version>
+        </dependency>
+
+        <!-- https://jarcasting.com/artifacts/org.nd4j/nd4j-api/ -->
+        <dependency>
+            <groupId>org.nd4j</groupId>
+            <artifactId>nd4j-api</artifactId>
+            <version>1.0.0-M2</version>
+        </dependency>
+        <!-- https://jarcasting.com/artifacts/org.nd4j/nd4j-native/ -->
+        <dependency>
+            <groupId>org.nd4j</groupId>
+            <artifactId>nd4j-native</artifactId>
+            <version>1.0.0-M2</version>
+        </dependency>
+        <!-- https://jarcasting.com/artifacts/org.nd4j/nd4j/ -->
+        <dependency>
+            <groupId>org.nd4j</groupId>
+            <artifactId>nd4j</artifactId>
+            <version>1.0.0-M2</version>
+            <type>pom</type>
+        </dependency>
+        <!-- https://jarcasting.com/artifacts/org.nd4j/nd4j-backends/ -->
+        <dependency>
+            <groupId>org.nd4j</groupId>
+            <artifactId>nd4j-backends</artifactId>
+            <version>1.0.0-M2</version>
+            <type>pom</type>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.7.25</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+            <version>1.7.25</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.nd4j/nd4j-common -->
+        <dependency>
+            <groupId>org.nd4j</groupId>
+            <artifactId>nd4j-common</artifactId>
+            <version>1.0.0-M2</version>
+        </dependency>
+
     </dependencies>
 
     <properties>

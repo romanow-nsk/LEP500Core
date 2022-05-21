@@ -18,10 +18,13 @@ public class AnalyseResult extends DAO implements I_TrendData{
     public final MeasureFile measure;
     public AnalyseResult(FFTStatistic statistic,MeasureFile measureFile) {
         measure = measureFile;
-        this.dFreq = statistic.getFreqStep();
-        this.spectrum = statistic.getNormalized();
-        this.message = statistic.getMessage();
         this.valid = statistic.isValid();
+        this.dFreq = statistic.getFreqStep();
+        if (valid)
+            this.spectrum = statistic.getNormalized();
+        else
+            this.spectrum = new double[0];
+                    this.message = statistic.getMessage();
         firstFreq = statistic.getFirstFreq();
         lastFreq = statistic.getLastFreq();
         nFirst = statistic.getnFirst();
