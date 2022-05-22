@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="LEP500Core:jar" />
+    </artifacts-to-build>
+  </component>
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="89a8c7ee-ce9d-48b7-a8a2-859f841fd4cf" name="Default Changelist" comment="КОл-во точек от правого края">
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CodeStyleSettingsInfer">
+    <option name="done" value="true" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../ABC/ABCCore" />
+    <option name="UPDATE_TYPE" value="REBASE" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="useMavenConfig" value="true" />
+      </MavenGeneralSettings>
+    </option>
+    <option name="importingSettings">
+      <MavenImportingSettings>
+        <option name="jdkForImporter" value="1.8" />
+      </MavenImportingSettings>
+    </option>
+  </component>
+  <component name="ProjectCodeStyleSettingsMigration">
+    <option name="version" value="2" />
+  </component>
+  <component name="ProjectId" id="1zXhtR1ELC4LPG76LFz8TzDqFqG" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../lep500-2/app/libs" />
+    <property name="project.structure.last.edited" value="Artifacts" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="romanow.lep500" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Application.FFTAudioTextFile">
+    <configuration name="FFTAudioTextFile" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="romanow.lep500.FFTAudioTextFile" />
+      <module name="LEP500Core" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="romanow.lep500.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="FileDescription" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="romanow.lep500.FileDescription" />
+      <module name="LEP500Core" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="romanow.lep500.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="SqeezyWaveData" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="romanow.lep500.SqeezyWaveData" />
+      <module name="LEP500Core" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="romanow.lep500.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.FFTAudioTextFile" />
+        <item itemvalue="Application.SqeezyWaveData" />
+        <item itemvalue="Application.FileDescription" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="89a8c7ee-ce9d-48b7-a8a2-859f841fd4cf" name="Default Changelist" comment="" />
+      <created>1634300555504</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1634300555504</updated>
+    </task>
+    <task id="LOCAL-00001" summary="fix0">
+      <created>1634302416195</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1634302416195</updated>
+    </task>
+    <task id="LOCAL-00002" summary="fix0">
+      <created>1634302721056</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1634302721056</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Слияние с COMMON">
+      <created>1634445842986</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1634445842986</updated>
+    </task>
+    <task id="LOCAL-00004" summary="LEP500File удален">
+      <created>1634803688577</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1634803688577</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Парсинг имени файла измерений">
+      <created>1634810902939</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1634810902955</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Парсинг имени файла измерений">
+      <created>1634819437274</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1634819437274</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Косяк тестового файла">
+      <created>1636908483264</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1636908483264</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Уровни сигнала">
+      <created>1640800675986</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1640800675986</updated>
+    </task>
+    <task id="LOCAL-00009" summary="2.0.10 jar без guava">
+      <created>1641488816365</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1641488816365</updated>
+    </task>
+    <task id="LOCAL-00010" summary="2.0.18 Нормализация только в группе">
+      <created>1651231221302</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1651231221302</updated>
+    </task>
+    <task id="LOCAL-00011" summary="2.0.18 БОМ-БОМ">
+      <created>1651479743124</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1651479743124</updated>
+    </task>
+    <task id="LOCAL-00012" summary="КОл-во точек от правого края">
+      <created>1653064994320</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1653064994320</updated>
+    </task>
+    <task id="LOCAL-00013" summary="КОл-во точек от правого края">
+      <created>1653065724320</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1653065724320</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <ignored-roots>
+      <path value="$PROJECT_DIR$/../LEP500Common" />
+    </ignored-roots>
+    <MESSAGE value="fix0" />
+    <MESSAGE value="Слияние с COMMON" />
+    <MESSAGE value="LEP500File удален" />
+    <MESSAGE value="Парсинг имени файла измерений" />
+    <MESSAGE value="Косяк тестового файла" />
+    <MESSAGE value="Уровни сигнала" />
+    <MESSAGE value="2.0.10 jar без guava" />
+    <MESSAGE value="2.0.18 Нормализация только в группе" />
+    <MESSAGE value="2.0.18 БОМ-БОМ" />
+    <MESSAGE value="КОл-во точек от правого края" />
+    <option name="LAST_COMMIT_MESSAGE" value="КОл-во точек от правого края" />
+  </component>
+</project>
