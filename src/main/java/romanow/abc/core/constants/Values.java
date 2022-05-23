@@ -157,6 +157,7 @@ public class Values extends ValuesBase {
     @CONST(group = "MState", title = "Норма-")          // Первый пик проходит
     public final static int MSNormalMinus = 9;
     //------------- Типы заключений ЭКСПЕРТА о спектре состояния опоры --------------------------------------
+    public final static int EStateCount = 10;
     @CONST(group = "EState", title = "Не поддерживается")
     public final static int ESNotSupported = 0;
     @CONST(group = "EState", title = "Нет оценки")
@@ -177,6 +178,31 @@ public class Values extends ValuesBase {
     public final static int ESWarning = 8;
     @CONST(group = "EState", title = "Аварийное")       // Аварийное
     public final static int ESFailure = 9;
+    //------------- Типы заключений (окончательное) ЭКСПЕРТА о спектре состояния опоры --------------------------------------
+    public final static int EState2Count = 5;
+    @CONST(group = "EState2", title = "Невозможно")      // Нет оценки,нестандартное
+    public final static int ES2None = 0;
+    @CONST(group = "EState2", title = "Недостаточное")   // Шум, слабый сигнал
+    public final static int ES2Bad = 1;
+    @CONST(group = "EState2", title = "Норма")           // Идеальное, норма, удовл.
+    public final static int ES2Normal = 2;
+    @CONST(group = "EState2", title = "Подозрение")      // Предупреждение
+    public final static int ES2Warning = 3;
+    @CONST(group = "EState2", title = "Аварийное")       // Аварийное
+    public final static int ES2Failure = 4;
+    public static HashMap<Integer,Integer> stateToState2 = new HashMap<>();
+    static {
+        stateToState2.put(Values.ESNotSupported,Values.ES2None);
+        stateToState2.put(Values.ESNotSet,Values.ES2None);
+        stateToState2.put(Values.ESAnomal,Values.ES2None);
+        stateToState2.put(Values.ESNoise,Values.ES2Bad);
+        stateToState2.put(Values.ESLowLevel,Values.ES2Bad);
+        stateToState2.put(Values.ESIdeal,Values.ES2Normal);
+        stateToState2.put(Values.ESNormal,Values.ES2Normal);
+        stateToState2.put(Values.ESValid,Values.ES2Normal);
+        stateToState2.put(Values.ESWarning,Values.ES2Warning);
+        stateToState2.put(Values.ESFailure,Values.ES2Failure);
+        }
     //------------- Виды экстремумов------------------------------------------------------
     @CONST(group = "EXMode", title = "Амплитуда")
     public final static int ExtremeAbsMode=0;
