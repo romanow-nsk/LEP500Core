@@ -16,5 +16,5 @@ public class Extreme {
         this.decSize = decSize;
         this.power = power;
         this.power2 = power2;
-    }
+        }
 }

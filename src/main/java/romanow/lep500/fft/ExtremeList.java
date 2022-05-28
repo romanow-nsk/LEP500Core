@@ -6,6 +6,7 @@ import romanow.abc.core.utils.Pair;
 import romanow.lep500.LEP500Params;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 
 public class ExtremeList extends DAO {
     private ArrayList<Extreme> data = new ArrayList<>();
@@ -156,4 +157,13 @@ public class ExtremeList extends DAO {
         out += String.format("Средний - %d%% к первому\n",(int)(sum/(count-1)));
         return out;
         }
-}
+    public void sortByValue(){
+        data.sort(new Comparator<Extreme>() {
+            @Override
+            public int compare(Extreme o1, Extreme o2) {
+                if (o1.value==o2.value) return 0;
+                return o1.value > o2.value ? -1 : 1;
+                }
+            });
+        }
+    }
