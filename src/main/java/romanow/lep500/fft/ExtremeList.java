@@ -166,4 +166,16 @@ public class ExtremeList extends DAO {
                 }
             });
         }
+    public void sortByFreq(final double baseIdx){
+        for(int i=1;i<data.size();i++){
+            for(int j=i;j>0;j--){
+                if (Math.abs(data.get(j).idx-baseIdx) > Math.abs(data.get(j-1).idx-baseIdx))
+                    break;
+                Extreme extreme = data.get(j);
+                Extreme extreme2 = data.get(j-1);
+                data.set(j,extreme2);
+                data.set(j-1,extreme);
+                }
+            }
+        }
     }
