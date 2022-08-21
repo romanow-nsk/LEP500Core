@@ -130,7 +130,6 @@ public class FFTAudioTextFile implements FFTFileSource {
             fd.setSensor(in);
             }
         }
-
     public void readData(FileDescription fd, BufferedReader AudioFile) {
         readData(fd,AudioFile,true);
         }
