@@ -9,11 +9,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="89a8c7ee-ce9d-48b7-a8a2-859f841fd4cf" name="Default Changelist" comment="КОл-во точек от правого края">
-      <change beforePath="$PROJECT_DIR$/../../ABC/ABCCore/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../ABC/ABCCore/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-    </list>
+    <list default="true" id="89a8c7ee-ce9d-48b7-a8a2-859f841fd4cf" name="Default Changelist" comment="РЕФАКТОРИНГ VALUES" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -57,13 +53,13 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "project.structure.last.edited": "Artifacts",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="romanow.lep500" />
@@ -217,7 +213,14 @@
       <option name="project" value="LOCAL" />
       <updated>1653065724320</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="РЕФАКТОРИНГ VALUES">
+      <created>1664618574941</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1664618574941</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -245,6 +248,7 @@
     <MESSAGE value="2.0.18 Нормализация только в группе" />
     <MESSAGE value="2.0.18 БОМ-БОМ" />
     <MESSAGE value="КОл-во точек от правого края" />
-    <option name="LAST_COMMIT_MESSAGE" value="КОл-во точек от правого края" />
+    <MESSAGE value="РЕФАКТОРИНГ VALUES" />
+    <option name="LAST_COMMIT_MESSAGE" value="РЕФАКТОРИНГ VALUES" />
   </component>
 </project>
