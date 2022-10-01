@@ -16,12 +16,11 @@ public class Values extends ValuesBase {
     private Values(){
         super();
         System.out.println("Инициализация Values");
-        initEnvTwo();
-        getConstMap().createConstList(this);
         }
     public final static Values init(){
         if (two == null){
             two = new Values();
+            two.afterInit();
             setOne(two);
             }
         return two;
@@ -56,34 +55,48 @@ public class Values extends ValuesBase {
             "/drawable/lep500min.png",
             "Опоры России"
             };
-    private void initEnvTwo(){
+    @Override
+    protected void initEnv() {
         I_Environment env = new I_Environment() {
             @Override
             public String applicationClassName(int classType) {
                 return lep500ClassNames[classType];
-                }
+            }
+
             @Override
             public String applicationName(int nameNype) {
                 return lep500AppNames[nameNype];
             }
+
             @Override
             public User superUser() {
                 return superUser;
-                }
+            }
+
             @Override
             public Class applicationClass(int classType) throws UniException {
-                return createApplicationClass(classType,lep500ClassNames);
-                }
+                return createApplicationClass(classType, lep500ClassNames);
+            }
+
             @Override
             public Object applicationObject(int classType) throws UniException {
-                return createApplicationObject(classType,lep500ClassNames);
-                }
+                return createApplicationObject(classType, lep500ClassNames);
+            }
+
             @Override
-            public int releaseNumber() { return LEP500ReleaseNumber; }
+            public int releaseNumber() {
+                return LEP500ReleaseNumber;
+            }
+
             @Override
-            public WorkSettingsBase currentWorkSettings() { return new WorkSettings(); }
-            };
+            public WorkSettingsBase currentWorkSettings() {
+                return new WorkSettings();
+            }
+        };
         setEnv(env);
+        }
+    @Override
+    protected void initTables(){
         EntityIndexedFactory EntityFactory = getEntityFactory();
         EntityFactory.put(new TableItem("Настройки", WorkSettings.class));
         EntityFactory.put(new TableItem("Измерение", MeasureFile.class));

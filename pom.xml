@@ -21,6 +21,12 @@
         </plugins>
     </build>
     <dependencies>
+        <dependency>
+            <groupId>romanow.abc</groupId>
+            <artifactId>ABCCore</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
         <!-- https://mvnrepository.com/artifact/com.squareup.okhttp3/okhttp -->
         <dependency>
             <groupId>com.squareup.okhttp3</groupId>
