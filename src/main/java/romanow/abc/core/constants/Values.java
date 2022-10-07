@@ -25,7 +25,6 @@ public class Values extends ValuesBase {
             }
         return two;
         }
-
     // 1. Константы наследуются (аннотации)
     // 2. Массивы строк перекрываются
     // 3. статическая инициализация наследуется
@@ -97,6 +96,7 @@ public class Values extends ValuesBase {
         }
     @Override
     protected void initTables(){
+        super.initTables();
         EntityIndexedFactory EntityFactory = getEntityFactory();
         EntityFactory.put(new TableItem("Настройки", WorkSettings.class));
         EntityFactory.put(new TableItem("Измерение", MeasureFile.class));
