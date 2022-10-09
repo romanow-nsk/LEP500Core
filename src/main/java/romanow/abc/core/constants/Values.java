@@ -5,6 +5,7 @@ import romanow.abc.core.entity.EntityIndexedFactory;
 import romanow.abc.core.entity.base.WorkSettingsBase;
 import romanow.abc.core.entity.subjectarea.*;
 import romanow.abc.core.entity.users.User;
+import romanow.lep500.AnalyseResult;
 import romanow.lep500.LEP500Params;
 import romanow.lep500.fft.*;
 
@@ -104,6 +105,7 @@ public class Values extends ValuesBase {
         EntityFactory.put(new TableItem("Линия", PowerLine.class).add("name"));
         EntityFactory.put(new TableItem("Параметры", LEP500Params.class));
         EntityFactory.put(new TableItem("Выборка", MFSelection.class));
+        EntityFactory.put(new TableItem("Анализ", AnalyseResult.class));
         HashMap<String,String> PrefixMap = getPrefixMap();
         PrefixMap.put("MFSelection.createDate","c");
         PrefixMap.put("MeasureFile.importDate","i");

@@ -16,6 +16,17 @@ public class AnalyseResult extends DAO implements I_TrendData{
     public final String message;
     public final boolean valid;
     public final MeasureFile measure;
+    public AnalyseResult(){
+        firstFreq=0;
+        lastFreq=0;
+        dFreq=0;
+        nFirst=0;
+        nLast=0;
+        spectrum=null;
+        message = "";
+        valid = false;
+        measure = null;
+    }
     public AnalyseResult(FFTStatistic statistic,MeasureFile measureFile) {
         measure = measureFile;
         this.valid = statistic.isValid();
