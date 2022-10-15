@@ -13,7 +13,8 @@ public class LEP500Params extends NamedEntity {
     public int  p_BlockSize=1;                 // Количество блоков по 1024 отсчета
     public int  p_OverProc=50;                 // Процент перекрытия окна
     public int  kSmooth=30;                    // Циклов сглаживания
-    public int  winFun= FFT.WinModeRectangle;   // Вид функции окна
+    public int  notchOver=10;                  // Коэффициент амплитуды удаления зазубрины
+    public int  winFun= FFT.WinModeRectangle;  // Вид функции окна
     public int  measureDuration=10;            // Время снятия вибрации в сек (1...300)
     public String measureGroup="СМ-300";       // Название линии
     public String measureTitle="Опора 125";    // Название опоры

@@ -9,7 +9,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="89a8c7ee-ce9d-48b7-a8a2-859f841fd4cf" name="Default Changelist" comment="РЕФАКТОРИНГ VALUES" />
+    <list default="true" id="89a8c7ee-ce9d-48b7-a8a2-859f841fd4cf" name="Default Changelist" comment="РЕФАКТОРИНГ VALUES">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/romanow/lep500/LEP500Params.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/romanow/lep500/LEP500Params.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/romanow/lep500/fft/Extreme.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/romanow/lep500/fft/Extreme.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/romanow/lep500/fft/FFTStatistic.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/romanow/lep500/fft/FFTStatistic.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />

@@ -270,13 +270,34 @@ public class FFTStatistic {
             int i=peaksIdx.get(idx);
             double v1 = data[k1];
             double v2 = data[k2];
+            double v0 = data[peaksIdx.get(idx)];
             double dv = (v2-v1)/(k2-k1);
+            if (set.notchOver!=0){      // Удаление зазубрин
+                double v3 = 0;
+                double kOver = 0;
+                boolean remove = false;
+                if (idx+2<peaksIdx.size()){
+                    v3 = data[peaksIdx.get(idx+2)];
+                    kOver = (v3-v1)/(v0-v2);
+                    if (v3>v0 && kOver > set.notchOver)
+                        remove= true;
+                    }
+                if (!remove && idx>=2){
+                    v3 = data[peaksIdx.get(idx-2)];
+                    kOver = (v3-v2)/(v0-v1);
+                    if (v3>v0 && kOver > set.notchOver)
+                        remove= true;
+                        }
+                if (remove){
+                    continue;
+                    }
+                }
             double power=0;
             double power2=0;
             double vv = v1;
-            double vmin = v1 < v2 ? v1 : v2;
-            for(int j=k1;j<=k2;j++,vv+=dv){
-               power +=  data[j]-vmin;
+            double vmax = v1 > v2 ? v1 : v2;
+            for(int j=k1;j<=k2;j++,vv+=dv){     // Мощность по минимальному спаду
+               power +=  data[j]-vmax < 0 ? 0 : data[j]-vmax;
                power2 +=  data[j]-trend[j];
                }
            for(k3=i;k3>=0 && data[k3]*data[k3]>data[i]*data[i]/2;k3--);
@@ -295,7 +316,7 @@ public class FFTStatistic {
             sort(out.data(),facade.comparator());
             } catch (Exception ee){ }
         return out;
-    }
+        }
     //--------------------------------------------------------------------------
     public String getTypeName() {
         return "Статистика";
