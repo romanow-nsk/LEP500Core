@@ -10,6 +10,7 @@ public class LEP500Params extends NamedEntity {
     public double LastFreq=30;                 // Верхняя граница частоты при поиске максимусов
     public int  nTrendPoints=50;               // Точек при сглаживании тренда в волне =0 - отключено
     public int  nTrendPointsSpectrum=200;      // Точек при сглаживании тренда в спектре =0 - отключено
+    public int  nTrendPointsSpectrumCalc=200;  // Точек для подсчета тренда в спектре
     public int  p_BlockSize=1;                 // Количество блоков по 1024 отсчета
     public int  p_OverProc=50;                 // Процент перекрытия окна
     public int  kSmooth=30;                    // Циклов сглаживания

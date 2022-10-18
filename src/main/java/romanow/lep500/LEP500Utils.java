@@ -18,9 +18,18 @@ public class LEP500Utils {
                     middles[i]+=data[j];
             }
             middles[i]/=2*nPoints+1;
-        }
+            }
         return middles;
-    }
+        }
+    public static double[] removeTrend(double data[],int nPoints){
+        if (nPoints==0)
+            return data;
+        double middles[] = calcTrend(data,nPoints);
+        double out[] = new double[data.length];
+        for(int ii=0;ii<data.length;ii++)
+            out[ii] = data[ii]-middles[ii];
+        return out;
+        }
     //------------- СТАТИЧЕСКАЯ ЧАСТЬ
     private static double expValues[]=null;         // Подчитаниие заранее значения экспоненты
     private static double dExp=0.01F;               // Шаг экспоненты

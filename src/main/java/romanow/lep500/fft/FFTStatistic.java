@@ -259,9 +259,10 @@ public class FFTStatistic {
     //----------------------------------------------------------------------------------------------
     public ExtremeList createExtrems(int mode, LEP500Params set) {
         noFirstLastPoints(set);
-        double data[] = normalized.getOriginal();
         ExtremeList out = new ExtremeList(mode);
-        double trend[] = LEP500Utils.calcTrend(data,set.nTrendPoints);
+        normalized.removeTrend(set.nTrendPointsSpectrum);
+        double data[] = normalized.getOriginal();
+        double trend[] = LEP500Utils.calcTrend(data,set.nTrendPointsSpectrumCalc);
         ArrayList<Integer> peaksIdx = createPeakIdxs(data,nFirst,nLast);
         for(int idx=1;idx<peaksIdx.size();idx+=2){
             int k1,k2,k3,k4,k5,k6;
