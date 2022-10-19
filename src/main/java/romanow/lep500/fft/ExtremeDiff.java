@@ -15,6 +15,10 @@ public class ExtremeDiff extends ExtremeFacade {
         return extreme.diff;
         }
     @Override
+    public boolean isPowerFacade() {
+        return false;
+        }
+    @Override
     public Comparator<Extreme> comparator() {
         return new Comparator<Extreme>() {
             @Override

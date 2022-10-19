@@ -15,6 +15,10 @@ public class ExtremeNull extends ExtremeFacade {
         return 0;
         }
     @Override
+    public boolean isPowerFacade() {
+        return false;
+        }
+    @Override
     public Comparator<Extreme> comparator() {
         return null;
         }

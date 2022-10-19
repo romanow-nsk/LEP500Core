@@ -49,11 +49,11 @@ public class ExtremeList extends DAO {
             double f = extreme1.idx * freqStep;
             facade.setExtreme(extreme1);
             double val = facade.getValue();
-            if (val < p2){
+            if (extreme1.value < p1){       // Фильтрация по основной амплитуде
                 data.remove(i);
                 continue;
                 }
-            if (extreme1.value < p1){
+            if (val < (facade.isPowerFacade() ? p2 : p1)){                  // Фильтрация по параметру фасада ????
                 data.remove(i);
                 continue;
                 }
@@ -116,6 +116,107 @@ public class ExtremeList extends DAO {
         testResult = x>set.K6 ? Values.MSNormalMinus : (x<set.K7 ? Values.MSSumPeak1 : Values.MSSumPeak2);
         return new Pair<>(testComment,testResult);
         }
+    //-------------------------------- Алгоритм базовой оценки --------------------------------------------
+    public Pair<String,Integer> testAlarmBase(LEP500Params set, double freqStep){
+        facade = new ExtremeAbs();
+        testComment = "";
+        if (data.size()==0){
+            testComment="Нет пиков (шумы,слабый сигнал)";
+            return  new Pair<>(testComment,Values.MSLowLevel);
+            }
+        Extreme extreme = data.get(0);
+        double f0 = extreme.idx*freqStep;
+        testComment += String.format("Осн.част.=%5.2f гц Ампл.=%5.2f "+(extreme.decSize==-1 ? "" : "D=%5.2f")+"\n",
+                extreme.idx*freqStep, extreme.value,Math.PI*extreme.decSize/extreme.idx);
+        double val0 = extreme.value;            // Значение параметра фасада
+        //------------------- Фильтрация------------------------------------------------------------
+        double p1 = extreme.value * set.amplLevelProc / 100;
+        double p2 = val0 * set.powerLevelProc / 100;
+        for(int i=1;i<data.size();) {
+            Extreme extreme1 = data.get(i);
+            double f = extreme1.idx * freqStep;
+            double val = extreme1.value;
+            if (extreme1.value < p1){       // Фильтрация по основной амплитуде
+                data.remove(i);
+                continue;
+                }
+            i++;
+            }
+        //------------------------------------------------------------------------------------------
+        if (extreme.value<set.K1){
+            testComment+="Слабые пики (шумы,слабый сигнал)";
+            return new Pair<>(testComment, Values.MSLowLevel);
+            }
+        if (data.size()==1) {
+            if (f0 < set.mainFreqLowLimit || f0 > set.mainFreqHighLimit){
+                testComment+="Пик вне основного диапазона "+set.mainFreqLowLimit+"..."+set.mainFreqHighLimit;
+                testResult = Values.MSFail;
+                }
+            else{
+                testComment+="Норма: пик в диапазоне "+set.mainFreqLowLimit+"..."+set.mainFreqHighLimit;
+                testResult = Values.MSNormal;
+                }
+            return new Pair<>(testComment, testResult);
+            }
+        boolean all=true;
+        for(int i=1;i<data.size();i++) {
+            Extreme extreme1 = data.get(i);
+            double f = extreme1.idx * freqStep;
+            double val = extreme1.value;
+            if (val/val0>set.K2){
+                all=false;
+                break;
+                }
+            }
+        if (all){
+            testComment+="Нет выраженного пика, шумы";
+            return new Pair<>(testComment, Values.MSNoise);
+            }
+        ArrayList<Extreme> highFreq = new ArrayList<>();
+        ArrayList<Extreme> lowFreq = new ArrayList<>();
+        for(int i=1;i<data.size();i++){
+            Extreme extreme1 = data.get(i);
+            double f = extreme1.idx * freqStep;
+            if (f > set.secondFreqLimit)
+                highFreq.add(extreme1);
+            if (f >= set.mainFreqLowLimit &&  f<=set.mainFreqHighLimit && extreme1.value/val0*100 > set.neighborPeakAmplProc)
+                lowFreq.add(extreme1);
+                }
+        boolean b1 = highFreq.size()!=0;
+        boolean b2 = lowFreq.size()!=0;
+        if (!b2 && !b1){
+            testComment+="Норма: пик в диапазоне "+set.mainFreqLowLimit+"..."+set.mainFreqHighLimit;
+            return new Pair<>(testComment, Values.MSNormal);
+            }
+        if (!b2 && b1){
+            testComment+="ВЧ колебания: ";
+            for(int i=0;i<highFreq.size();i++){
+                if (i!=0)
+                    testComment+=",";
+                testComment+=String.format("%5.2f",highFreq.get(i).idx*freqStep);
+                testComment+=" гц";
+                }
+            return new Pair<>(testComment, Values.MSSumPeak2);
+            }
+        if (b2){
+            if (b1){
+                testComment+="ВЧ колебания: ";
+                for(int i=0;i<highFreq.size();i++){
+                    if (i!=0)
+                        testComment+=",";
+                    testComment+=String.format("%5.2f",highFreq.get(i).idx*freqStep);
+                    testComment+=" гц";
+                    }
+                }
+            double f = lowFreq.get(0).idx * freqStep;
+            testComment+="Смежный пик "+String.format("%5.2f гц Ампл.=%5.2f ",f, lowFreq.get(0).value);
+            boolean bb = Math.abs((f0-f)/f0*100) > set.neighborPeakFreqProc;
+            testComment+= bb ? "(авария)" : "(предупр.)";
+            return new Pair<>(testComment,  bb ? Values.MSSumPeak1 : Values.MSSumPeak2);
+            }
+        return null;
+        }
+    //-----------------------------------------------------------------------------------------------------
     public int getExtremeMode() {
         return extremeMode; }
     public int getTestResult() {

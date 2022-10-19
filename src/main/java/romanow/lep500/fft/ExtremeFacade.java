@@ -7,6 +7,7 @@ public abstract class ExtremeFacade {
     public abstract String getTitle();
     public abstract String getColName();
     public abstract double getValue();
+    public abstract boolean isPowerFacade();
     public void setExtreme(Extreme extreme){
         this.extreme = extreme;
         }

@@ -171,6 +171,8 @@ public class Values extends ValuesBase {
     public final static int MSSumPeak2 = 8;
     @CONST(group = "MState", title = "Норма-")          // Первый пик проходит
     public final static int MSNormalMinus = 9;
+    @CONST(group = "MState", title = "Частота вне диапазона")          // Первый пик проходит
+    public final static int MSFail = 10;
     //------------- Типы заключений ЭКСПЕРТА о спектре состояния опоры --------------------------------------
     public final static int EStateCount = 10;
     @CONST(group = "EState", title = "Не поддерживается")

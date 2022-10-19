@@ -12,6 +12,10 @@ public class ExtremePower2 extends ExtremeFacade {
         return extreme.power2;
         }
     @Override
+    public boolean isPowerFacade() {
+        return true;
+        }
+    @Override
     public String getColName() {
         return "Мощн."; }
     @Override

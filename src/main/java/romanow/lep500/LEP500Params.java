@@ -38,5 +38,11 @@ public class LEP500Params extends NamedEntity {
     public String getTitle(){
         return paramListName;
     }
-
+    //---------------------------- Настройка алгортма 2 ---------------------------
+    public double mainFreqLowLimit=2.1;         // Нижняя частота основного диапазона
+    public double mainFreqHighLimit=3.5;        // Верхняя частота основного диапазона
+    public int neighborPeakAmplProc=50;         // Относительная амплитуда смежного пика (%)
+    public int neighborPeakFreqProc=15;         // Относительная частота смежного пика (%)
+    public int signalHighLevelDB=35;            // Пороговый уровень сигнала (db)
+    public double secondFreqLimit=5;            // Нижняя частота дополнительного диапазона
 }

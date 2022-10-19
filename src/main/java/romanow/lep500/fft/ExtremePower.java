@@ -15,6 +15,10 @@ public class ExtremePower extends ExtremeFacade {
         return extreme.power;
         }
     @Override
+    public boolean isPowerFacade() {
+        return true;
+        }
+    @Override
     public Comparator<Extreme> comparator() {
         return new Comparator<Extreme>() {
             @Override
