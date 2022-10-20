@@ -128,7 +128,7 @@ public class ExtremeList extends DAO {
             if (i!=0)
                 testComment+=",";
             testComment+=String.format("%5.2f",freq.get(i).idx*freqStep);
-            testComment+=" гц";
+            testComment+=" гц\n";
             }
         return testComment;
         }
@@ -187,7 +187,7 @@ public class ExtremeList extends DAO {
             }
         if (highFreq.size()!=0){
             warning=true;
-            testComment+="ВЧ колебания: "+freqList(highFreq,freqStep);
+            testComment+="ВЧ колебания: "+freqList(highFreq,freqStep)+"\n";
             }
         //------------------- Выраженный пик в рабочем диапазоне-----------------------------------------------
         boolean all=true;
