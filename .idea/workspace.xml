@@ -12,6 +12,7 @@
     <list default="true" id="89a8c7ee-ce9d-48b7-a8a2-859f841fd4cf" name="Default Changelist" comment="2.0.24 Базовый алгоритм">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/romanow/lep500/fft/ExtremeList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/romanow/lep500/fft/ExtremeList.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/romanow/lep500/fft/FFTStatistic.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/romanow/lep500/fft/FFTStatistic.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -244,7 +245,14 @@
       <option name="project" value="LOCAL" />
       <updated>1666202383216</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="2.0.24 Базовый алгоритм">
+      <created>1666241275090</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1666241275090</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">

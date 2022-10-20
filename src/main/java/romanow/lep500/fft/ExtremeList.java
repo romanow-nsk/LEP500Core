@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 
 public class ExtremeList extends DAO {
+    private FFTStatistic source;
     private ArrayList<Extreme> data = new ArrayList<>();
     private transient ExtremeFacade facade;
     private int extremeMode=0;
@@ -17,6 +18,9 @@ public class ExtremeList extends DAO {
     public ExtremeFacade getFacade() {
         return facade;
         }
+    public FFTStatistic getSource() {
+        return source;
+        }
     private void createFacade(){
         try {
             facade = (ExtremeFacade)Values.extremeFacade[extremeMode].newInstance();
@@ -24,8 +28,9 @@ public class ExtremeList extends DAO {
                 facade = new ExtremeNull();
                 }
         }
-    public ExtremeList(int mode){
+    public ExtremeList(int mode,FFTStatistic src0){
         extremeMode = mode;
+        source = src0;
         createFacade();
         }
     public Pair<String,Integer> testAlarm2(LEP500Params set, double freqStep){
@@ -131,6 +136,13 @@ public class ExtremeList extends DAO {
         facade = new ExtremeAbs();
         testComment = "";
         boolean warning=false;
+        int waveLevelDB = FFTArray.deciBells(source.getWave().calcMaxAbs(false));
+        int normLevel = set.signalHighLevelDB;
+        if (waveLevelDB < -normLevel){
+            warning=true;
+            String ss = "Уровни (волна): "+source.getWave().deciBellToString(false);
+            testComment += "Низкий уровень сигнала < -"+normLevel+" db\n";
+            }
         if (data.size()==0){
             testComment="Нет пиков (шумы,слабый сигнал)";
             return  new Pair<>(testComment,Values.MSLowLevel);
