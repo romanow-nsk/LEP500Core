@@ -128,7 +128,7 @@ public class ExtremeList extends DAO {
             if (i!=0)
                 testComment+=",";
             testComment+=String.format("%5.2f",freq.get(i).idx*freqStep);
-            testComment+=" гц\n";
+            testComment+=" гц";
             }
         return testComment;
         }
@@ -144,7 +144,7 @@ public class ExtremeList extends DAO {
             testComment += "Низкий уровень сигнала < -"+normLevel+" db\n";
             }
         if (data.size()==0){
-            testComment="Нет пиков (шумы,слабый сигнал)";
+            testComment+="Нет пиков (шумы,слабый сигнал)";
             return  new Pair<>(testComment,Values.MSLowLevel);
             }
         Extreme extreme = data.get(0);
