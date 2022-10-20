@@ -9,18 +9,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="89a8c7ee-ce9d-48b7-a8a2-859f841fd4cf" name="Default Changelist" comment="2.0.23 удаление зазубрин">
+    <list default="true" id="89a8c7ee-ce9d-48b7-a8a2-859f841fd4cf" name="Default Changelist" comment="2.0.24 Базовый алгоритм">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/romanow/abc/core/constants/Values.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/romanow/abc/core/constants/Values.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/romanow/lep500/LEP500Params.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/romanow/lep500/LEP500Params.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/romanow/lep500/fft/ExtremeAbs.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/romanow/lep500/fft/ExtremeAbs.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/romanow/lep500/fft/ExtremeDiff.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/romanow/lep500/fft/ExtremeDiff.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/romanow/lep500/fft/ExtremeFacade.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/romanow/lep500/fft/ExtremeFacade.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/romanow/lep500/fft/ExtremeList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/romanow/lep500/fft/ExtremeList.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/romanow/lep500/fft/ExtremeNull.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/romanow/lep500/fft/ExtremeNull.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/romanow/lep500/fft/ExtremePower.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/romanow/lep500/fft/ExtremePower.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/romanow/lep500/fft/ExtremePower2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/romanow/lep500/fft/ExtremePower2.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/romanow/lep500/fft/ExtremeTrend.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/romanow/lep500/fft/ExtremeTrend.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -246,7 +237,14 @@
       <option name="project" value="LOCAL" />
       <updated>1666078828934</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="2.0.24 Базовый алгоритм">
+      <created>1666202383216</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1666202383216</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -276,6 +274,7 @@
     <MESSAGE value="КОл-во точек от правого края" />
     <MESSAGE value="РЕФАКТОРИНГ VALUES" />
     <MESSAGE value="2.0.23 удаление зазубрин" />
-    <option name="LAST_COMMIT_MESSAGE" value="2.0.23 удаление зазубрин" />
+    <MESSAGE value="2.0.24 Базовый алгоритм" />
+    <option name="LAST_COMMIT_MESSAGE" value="2.0.24 Базовый алгоритм" />
   </component>
 </project>
