@@ -9,7 +9,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="89a8c7ee-ce9d-48b7-a8a2-859f841fd4cf" name="Default Changelist" comment="2.0.24 Базовый алгоритм">
+    <list default="true" id="89a8c7ee-ce9d-48b7-a8a2-859f841fd4cf" name="Default Changelist" comment="2.0.24 Базовый алгоритм c НЧ диапазоном">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/romanow/lep500/LEP500Params.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/romanow/lep500/LEP500Params.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/romanow/lep500/fft/ExtremeList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/romanow/lep500/fft/ExtremeList.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -264,7 +266,14 @@
       <option name="project" value="LOCAL" />
       <updated>1666244601968</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="2.0.24 Базовый алгоритм">
+      <created>1666245479931</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1666245479931</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -295,6 +304,7 @@
     <MESSAGE value="РЕФАКТОРИНГ VALUES" />
     <MESSAGE value="2.0.23 удаление зазубрин" />
     <MESSAGE value="2.0.24 Базовый алгоритм" />
-    <option name="LAST_COMMIT_MESSAGE" value="2.0.24 Базовый алгоритм" />
+    <MESSAGE value="2.0.24 Базовый алгоритм c НЧ диапазоном" />
+    <option name="LAST_COMMIT_MESSAGE" value="2.0.24 Базовый алгоритм c НЧ диапазоном" />
   </component>
 </project>

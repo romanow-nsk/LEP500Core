@@ -169,29 +169,29 @@ public class ExtremeList extends DAO {
             }
         //------------------- Разделение по диапазонам ---------------------------------------------
         ArrayList<Extreme> highFreq = new ArrayList<>();
-        ArrayList<Extreme> normFreq = new ArrayList<>();
-        ArrayList<Extreme> lowFreq = new ArrayList<>();
+        ArrayList<Extreme> noizeFreq = new ArrayList<>();
+        ArrayList<Extreme> workFreq = new ArrayList<>();
         for(Extreme extreme1 : data){
             double f = extreme1.idx * freqStep;
-            if (f < set.mainFreqLowLimit)
-                lowFreq.add(extreme1);
-            if (f > set.secondFreqLimit)
+            if (f < set.lowFreqLimit){
+                noizeFreq.add(extreme1);
+                continue;
+                }
+            if (f > set.secondFreqLimit){
                 highFreq.add(extreme1);
-            if (f >= set.mainFreqLowLimit &&  f<=set.mainFreqHighLimit)
-                normFreq.add(extreme1);
-            }
-        //------------------- НЧ пики  ------------------------------------------------------------------
-        if (lowFreq.size()!=0){
-            warning=true;
-            testComment +="НЧ пики: "+freqList(lowFreq,freqStep)+"\nНедостаточное возбуждение опоры\n";
-            }
+                continue;
+                }
+            if (f >= set.lowFreqLimit &&  f<=set.mainFreqHighLimit)
+                workFreq.add(extreme1);
+                }
+        //------------------- ВЧ пики  ------------------------------------------------------------------
         if (highFreq.size()!=0){
             warning=true;
             testComment+="ВЧ колебания: "+freqList(highFreq,freqStep)+"\n";
             }
         //------------------- Выраженный пик в рабочем диапазоне-----------------------------------------------
         boolean all=true;
-        for(Extreme extreme1 : normFreq) {
+        for(Extreme extreme1 : workFreq) {
             double val = extreme1.value;
             if (val/val0>set.K2){
                 all=false;
@@ -199,21 +199,37 @@ public class ExtremeList extends DAO {
                 }
             }
         if (all){
-            testComment+="Нет выраженного пика в "+set.mainFreqLowLimit+"..."+set.mainFreqHighLimit+", шумы";
+            testComment+="Нет выраженного пика в "+set.lowFreqLimit+"..."+set.mainFreqHighLimit+", шумы";
             return new Pair<>(testComment, Values.MSNoise);
             }
-        extreme = normFreq.get(0);
+        //------------------- НЧ пики  ------------------------------------------------------------------
+        if (noizeFreq.size()!=0){
+            warning=true;
+            testComment +="НЧ пики: "+freqList(noizeFreq,freqStep)+ "\nНедостаточное возбуждение опоры\n";
+            if  (workFreq.size()!=0)
+                testComment += "Уровень пика относительно шума "+(int)(workFreq.get(0).value*100/noizeFreq.get(0).value)+"%\n";
+            }
+        extreme = workFreq.get(0);
+        double ff0 = extreme.idx*freqStep;
         testComment += String.format("Осн.част.=%5.2f гц Ампл.=%5.2f "+(extreme.decSize==-1 ? "" : "D=%5.2f")+"\n",
-                extreme.idx*freqStep, extreme.value,Math.PI*extreme.decSize/extreme.idx);
-        if (normFreq.size()==1 || normFreq.get(1).value/extreme.value*100 < set.neighborPeakAmplProc) {
-            testComment+="Норма: пик в диапазоне "+set.mainFreqLowLimit+"..."+set.mainFreqHighLimit;
-            testResult = warning ? Values.MSNormalMinus : Values.MSNormal;
+                ff0, extreme.value,Math.PI*extreme.decSize/extreme.idx);
+        boolean lowArea=false;
+        if (workFreq.size()==1 || workFreq.get(1).value/extreme.value*100 < set.neighborPeakAmplProc) {
+            if (ff0>=set.mainFreqLowLimit){
+                testComment+="Норма: пик в диапазоне "+set.mainFreqLowLimit+"..."+set.mainFreqHighLimit;
+                testResult = warning ? Values.MSNormalMinus : Values.MSNormal;
+                }
+            else{
+                lowArea=true;
+                testComment+="Авария: пик в диапазоне "+set.lowFreqLimit+"..."+set.mainFreqLowLimit;
+                testResult = warning ? Values.MSSumPeak1 : Values.MSFail;
+                }
             return new Pair<>(testComment, testResult);
             }
-        double f = normFreq.get(1).idx * freqStep;
-        testComment+="Смежный пик "+String.format("%5.2f гц Ампл.=%5.2f ",f, normFreq.get(1).value);
+        double f = workFreq.get(1).idx * freqStep;
+        testComment+="Смежный пик "+String.format("%5.2f гц Ампл.=%5.2f ",f, workFreq.get(1).value);
         boolean bb = Math.abs((f0-f)/f0*100) > set.neighborPeakFreqProc;
-        testComment+= bb ? "(авария)" : "(предупр.)";
+        testComment+= bb || lowArea ? "(авария)" : "(предупр.)";
         return new Pair<>(testComment,  bb ? Values.MSSumPeak1 : Values.MSSumPeak2);
         }
     //-----------------------------------------------------------------------------------------------------

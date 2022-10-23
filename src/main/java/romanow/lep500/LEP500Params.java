@@ -45,4 +45,5 @@ public class LEP500Params extends NamedEntity {
     public int neighborPeakFreqProc=15;         // Относительная частота смежного пика (%)
     public int signalHighLevelDB=35;            // Пороговый уровень сигнала (db)
     public double secondFreqLimit=5;            // Нижняя частота дополнительного диапазона
+    public double lowFreqLimit=0.5;             // Граница НЧ-диапазона (шумы)
 }
