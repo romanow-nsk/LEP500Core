@@ -204,6 +204,24 @@ public class ExtremeList extends DAO {
             }
         //------------------- НЧ пики  ------------------------------------------------------------------
         if (noizeFreq.size()!=0){
+            int fidx0 = noizeFreq.get(0).idx;
+            sortByFreq(noizeFreq);
+            sortByFreq(workFreq);
+            int count=0;
+            while(workFreq.size()>1){
+                Extreme ex = workFreq.get(0);
+                Extreme ex2 = workFreq.get(1);
+                if (ex.idx-fidx0 < ex2.idx-ex.idx){
+                    count++;
+                    noizeFreq.add(workFreq.remove(0));
+                    }
+                else break;
+                }
+            sortByAmpl(workFreq);
+            sortByAmpl(noizeFreq);
+            if (count!=0)
+                testComment+="Перенесено к НЧ пиков: "+ count+"\n";
+            //----------------------------- перенос частот основного диапазона в шумы -------------------
             warning=true;
             testComment +="НЧ пики: "+freqList(noizeFreq,freqStep)+ "\nНедостаточное возбуждение опоры\n";
             if  (workFreq.size()!=0)
@@ -233,6 +251,22 @@ public class ExtremeList extends DAO {
         return new Pair<>(testComment,  bb ? Values.MSSumPeak1 : Values.MSSumPeak2);
         }
     //-----------------------------------------------------------------------------------------------------
+    public static void sortByFreq(ArrayList<Extreme> list){
+        list.sort(new Comparator<Extreme>() {
+            @Override
+            public int compare(Extreme o1, Extreme o2) {
+                return o1.idx-o2.idx;
+                }
+            });
+        }
+    public static void sortByAmpl(ArrayList<Extreme> list){
+        list.sort(new Comparator<Extreme>() {
+            @Override
+            public int compare(Extreme o1, Extreme o2) {
+                return (int)(o2.value-o1.value);
+                }
+            });
+        }
     public int getExtremeMode() {
         return extremeMode; }
     public int getTestResult() {
