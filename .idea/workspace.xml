@@ -279,7 +279,14 @@
       <option name="project" value="LOCAL" />
       <updated>1666503631336</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="2.0.24 Базовый алгоритм c НЧ диапазоном">
+      <created>1666518978177</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1666518978177</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">

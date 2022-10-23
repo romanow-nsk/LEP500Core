@@ -263,7 +263,8 @@ public class ExtremeList extends DAO {
         list.sort(new Comparator<Extreme>() {
             @Override
             public int compare(Extreme o1, Extreme o2) {
-                return (int)(o2.value-o1.value);
+                double dd = o2.value-o1.value;
+                return dd==0 ? 0 : (dd > 0 ? 1 : -1);
                 }
             });
         }
