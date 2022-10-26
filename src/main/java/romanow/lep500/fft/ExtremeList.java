@@ -220,7 +220,7 @@ public class ExtremeList extends DAO {
             sortByAmpl(workFreq);
             sortByAmpl(noizeFreq);
             if (count!=0)
-                testComment+="Перенесено к НЧ пиков: "+ count+"\n";
+                testComment+="Перенесено в НЧ пиков: "+ count+"\n";
             //----------------------------- перенос частот основного диапазона в шумы -------------------
             warning=true;
             testComment +="НЧ пики: "+freqList(noizeFreq,freqStep)+ "\nНедостаточное возбуждение опоры\n";
@@ -247,7 +247,7 @@ public class ExtremeList extends DAO {
         double f = workFreq.get(1).idx * freqStep;
         testComment+="Смежный пик "+String.format("%5.2f гц Ампл.=%5.2f ",f, workFreq.get(1).value);
         boolean bb = Math.abs((f0-f)/f0*100) > set.neighborPeakFreqProc;
-        testComment+= bb || lowArea ? "(авария)" : "(предупр.)";
+        testComment+= bb || lowArea ? "(авария)" : "(граница)";
         return new Pair<>(testComment,  bb ? Values.MSSumPeak1 : Values.MSSumPeak2);
         }
     //-----------------------------------------------------------------------------------------------------
