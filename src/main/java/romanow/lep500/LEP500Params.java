@@ -25,7 +25,7 @@ public class LEP500Params extends NamedEntity {
     public int amplLevelProc=20;                // Уровень амплитуды пика для отсечения
     public int powerLevelProc=20;               // Уровень мощности пика для отсечения
     public double alarmFreqKoef=1.25;           // относительная ширина диапазона для тревоги
-    public String mailToSend="romanow@ngs.ru";
+    public String mailToSend="rodenko@mail.ru";
     public double K1=0.1;                       // Уровень нормированной амплитуды основого пика - слабый сигнал
     public double K2=0.1;                       // Уровень остальных к основному - отсутствие основного пика
     public double K3=0.4;                       // Уровень второстепенного пика к основному
