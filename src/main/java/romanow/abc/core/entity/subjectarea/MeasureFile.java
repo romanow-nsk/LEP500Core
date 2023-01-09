@@ -32,6 +32,16 @@ public class MeasureFile extends Entity {
     private long userId=0;                                                      // Собственник файла
     public MeasureFile(){}
     //------------------------------------------------------------------------------------
+    public MeasureFile(FileDescription fd){
+        measureDate = fd.getCreateDate();
+        sensor = fd.getSensor();
+        measureCounter = fd.getMeasureCounter();
+        fileFreq = fd.getFileFreq();
+        gps = fd.getGps();
+        comment = fd.getComment();
+        expertResult = fd.getExpertNote();
+        artifact.setRef(new Artifact(fd.getOriginalFileName(),0));
+        }
     //--------------- Получение праметров записи из заголовка файла
     public String getOriginalFileName(){
         return artifact.getRef()==null ? "" : artifact.getRef().getOriginalName();

@@ -113,6 +113,9 @@ public class FileDescription {
     public String toString(){
         return def(powerLine)+" / "+def(support)+" / "+def(sensor)+" ("+def(""+measureCounter)+")"+"\n"+createDate.dateTimeToString();
         }
+    public String toOneString(){
+        return def(powerLine)+" / "+def(support)+" / "+def(sensor)+" ("+def(""+measureCounter)+")"+" "+createDate.dateTimeToString();
+    }
     public String measureMetaData(){
         return toString()+"\nГеолокация: "+gps.toString()+ "\nЧастота: "+String.format("%6.2f",fileFreq)+"\nКомментарий: "+comment;
         }
