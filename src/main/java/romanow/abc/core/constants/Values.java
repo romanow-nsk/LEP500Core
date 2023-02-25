@@ -30,7 +30,7 @@ public class Values extends ValuesBase {
     // 2. Массивы строк перекрываются
     // 3. статическая инициализация наследуется
     private final static int LEP500ReleaseNumber=15;                  // номер сборки сервера
-    private User superUser = new User(UserSuperAdminType, "Система", "", "", "ESSDataserver", "schwanensee1969","9139877277");
+    private User superUser = new User(UserSuperAdminType, "Система", "", "", "ESSDataserver", "pi31415926","9130000000");
     //----------- Данные ПЛК вне мета-системы -------------------------------------
     public final static String ESSStateIcon[]={"/ess_none.png","/ess_off.png","/ess_on.png"};
     //-----------------------------------------------------------------------------
