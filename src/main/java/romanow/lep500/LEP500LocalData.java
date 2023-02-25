@@ -12,6 +12,7 @@ import java.util.ArrayList;
 
 public class LEP500LocalData {
     public LEP500LocalData(){}
+    @Getter @Setter boolean valid=false;
     @Getter private ArrayList<LEP500Params> lep500ParamList = new ArrayList<>();
     @Getter private ArrayList<MFSelection> selections = new ArrayList<>();
     @Getter private ArrayList<FileDescription> files = new ArrayList<>();
